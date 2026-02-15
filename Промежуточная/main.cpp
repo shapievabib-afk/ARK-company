@@ -847,21 +847,20 @@ public:
 
 class boss
 {
-    public:
+public:
+int HP;
+ int lvl;
     boss()
     {
         HP = 0;
         lvl = 0;
 
     }
-    protected:
- int HP;
- int lvl;
-
 };
 
 class Holin : public boss
 {
+public:
     Holin()
     {
         HP=10;
@@ -871,28 +870,84 @@ class Holin : public boss
         cout<<"I will not answer it."<<endl;
         cout<<"---------------------"<<endl;
     }
+    void win()
+    {
+        cout << "-Yes, I lost. But you'll lose in the session!"<<endl;
+
+    }
+    void lose()
+    {
+        cout<< "-Mde, you still have a lot to learn."  <<endl;
+
+    }
+
 };
 
 class Hitcliff : public boss
 {
+public:
     Hitcliff()
     {
         HP=300;
         lvl =96;
-        cout<<"Let's solve everything with a duel!"<<endl;
+        cout<<"- Let's solve everything with a duel!"<<endl;
         cout<<"If you win, the game will end."<<endl;
 
         cout<<"---------------------"<<endl;
     }
     void win()
     {
-        cout <<" "<<endl;
+        cout << "Oh, I forgot to mention. Kirito-kun, Asuna-kun... congratulations on completing the game."<<endl;
+        cout << " "<<endl;
+        cout <<"We looked up at Hitcliff. He looked down at us with a calm face"<<endl;
+        cout <<"------------------------------------"<<endl;
+        cout << " "<<endl;
+        cout <<"-Well, I have to go."<<endl;
+    }
+    void lose()
+    {
+        cout<< "Hitcliff watched my movement with pity,"  <<endl;
+        cout<< "which was neither a technique nor even an attack."  <<endl;
+        cout<< "He easily deflected and knocked my sword away with his shield,"  <<endl;
+        cout<< "and the blade in his right hand pierced my chest."  <<endl;
+        cout<< "--------------------------------"  <<endl;
+        cout << " "<<endl;
+        cout<< "System message: You're dead"  <<endl;
+    }
+
+};
+
+
+
+class Lepus : public boss
+{
+public:
+    Lepus()
+    {
+        HP=80;
+        lvl =30;
+        cout<<"Aggressive animal sounds!"<<endl;
+
+    }
+    void win()
+    {
+        cout << "Sounds of sadness"<<endl;
+
+    }
+    void lose()
+    {
+        cout<< "Sounds of joy"  <<endl;
+
     }
 
 };
 
 int main()
 {
+
+    bool playAgain = true;
+
+    while(playAgain){
     char type = 'q';
     char rare_type = 'q';
     int sword_choice;
@@ -1360,5 +1415,119 @@ int main()
         cout << "==================\n" << endl;
     }
     
-    return 0;
+    cout<<"Пора сразиться с боссом, выбери своего противника!"<<endl;
+    cout<<"Holin - A, Hitkliff -B, Lepus - C"<<endl;
+
+    char boss_type = 'q';
+
+    cin>>boss_type;
+
+    if (boss_type == 'A')
+    {
+        Holin h;
+        if (h.lvl < global_level)
+        {
+        cout<<"The fight begins now!"<<endl;
+        cout<<"Beat him with three shots"<<endl;
+        cout<<"Boss HP:"<<h.HP<<endl;
+
+        if (h.HP <= 3 * global_sharpness)
+        {
+            cout<<"You win!"<<endl;
+            cout<<"Boss:"<<endl;
+            h.win();
+
+            cout<<"Thanks for playing!"<<endl;
+
+            return 0;
+        }
+        else
+        {
+            cout<<"You lost!"<<endl;
+            cout<<"Boss:"<<endl;
+            h.lose();
+
+            cout<<"Thanks for playing!"<<endl;
+
+            return 0;
+        }
+        }
+        else{
+        cout<<"Sorry, your level is"<<global_level<<", it`s less than boss level"<<h.lvl<<". Try fight him next time"<<endl;
+        continue;
+        }
+    }
+
+    if (boss_type == 'B')
+    {
+        Hitcliff s;
+        if (s.lvl < global_level)
+        {
+        cout<<"The fight begins now!"<<endl;
+        cout<<"Beat him with three shots"<<endl;
+        cout<<"Boss HP:"<<s.HP<<endl;
+
+        if (s.HP <= 3 * global_sharpness)
+        {
+            cout<<"You win!"<<endl;
+            cout<<"Boss:"<<endl;
+            s.win();
+
+            cout<<"Thanks for playing!"<<endl;
+
+            return 0;
+        }
+        else
+        {
+            cout<<"You lost!"<<endl;
+            cout<<"Boss:"<<endl;
+            s.lose();
+
+            cout<<"Thanks for playing!"<<endl;
+
+            return 0;
+        }
+        }
+        else{
+        cout<<"Sorry, your level is"<<global_level<<", it`s less than boss level"<<s.lvl<<". Try fight him next time"<<endl;
+        continue;
+        }
+    }
+
+    if (boss_type == 'C')
+    {
+        Lepus L;
+        if (L.lvl < global_level)
+        {
+        cout<<"The fight begins now!"<<endl;
+        cout<<"Beat him with three shots"<<endl;
+        cout<<"Boss HP:"<<L.HP<<endl;
+
+        if (L.HP <= 3 * global_sharpness)
+        {
+            cout<<"You win!"<<endl;
+            cout<<"Boss:"<<endl;
+            L.win();
+
+            cout<<"Thanks for playing!"<<endl;
+
+            return 0;
+        }
+        else
+        {
+            cout<<"You lost!"<<endl;
+            cout<<"Boss:"<<endl;
+            L.lose();
+
+            cout<<"Thanks for playing!"<<endl;
+
+            return 0;
+        }
+        }
+        else{
+        cout<<"Sorry, your level is"<<global_level<<", it`s less than boss level"<<L.lvl<<". Try fight him next time"<<endl;
+        continue;
+        }
+    }
+}
 }
