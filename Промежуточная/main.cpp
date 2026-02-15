@@ -3,9 +3,18 @@
 
 using namespace std;
 
+int global_sharpness = 0;
+int global_level = 0;
+string global_sword_name = "";
+
 class Swords
 {
 public:
+
+int sharpness;
+int lvl;
+string rare;
+
     Swords()
     {
         sharpness = 0;
@@ -19,11 +28,26 @@ public:
             cout << "Medium - X" << endl;
             cout << "High - C" << endl;
         }
+};
 
-protected:
-    int sharpness;
-    int lvl;
-    string rare;
+class medium : public Swords
+{
+    public:
+    medium()
+    {
+        this->rare = "medium";}
+        void M()
+        {
+        cout << "Medium? It's somewhere in the middle..."<< endl;
+        cout << "                            "<<endl;
+        cout << "----------------------------"<< endl;
+        cout << "                            "<<endl;
+        cout << "Now choose a rare: " << endl;
+        cout << "Light red rare - Z"<<endl;
+        cout << "pink rare - X"<<endl;
+        cout << "light purple rare - C"<<endl;
+        cout << "lime rare - V"<<endl;
+      }
 };
 
 class Low: public Swords
@@ -120,6 +144,119 @@ public:
         cout<<"muhophagus - 1, a spiky tentacle- 2"<<endl;
         cout<<"Zhvalo sword - 3, Muramasa - 4"<<endl;
         cout<<"The mouse baseball bat- 5,glove with blades - 6"<<endl;
+    }
+};
+
+class Light_red : public medium
+{
+    public:
+    Light_red()
+    {
+        this->rare = "Light_red";
+
+
+    }
+    void M1()
+    {
+        cout << "Light red. It's almost red, but a little lighter"<< endl;
+        cout << "                            "<<endl;
+        cout << "----------------------------"<< endl;
+        cout << "                            "<<endl;
+        cout << "Now choose a Sword: " << endl;
+        cout << "The adamantine sword - 1"<<endl;
+        cout << "White Laser Saber - 2"<<endl;
+        cout << "The Destroyer Blade - 3"<<endl;
+        cout << "The Cobalt Sword - 4"<<endl;
+        cout << "Elucidator and Dark Repulser - 5"<<endl;
+        cout << "The Mithril Sword - 6"<<endl;
+
+    }
+};
+
+class pink : public medium
+{
+    public:
+    pink()
+    {
+        this->rare = "pink";
+
+
+    }
+    void M2()
+    {
+        cout << "Pink is a very cute color"<< endl;
+        cout << "                            "<<endl;
+        cout << "----------------------------"<< endl;
+        cout << "                            "<<endl;
+        cout << "Now choose a Sword: " << endl;
+        cout << "Lambent Light - 1"<<endl;
+        cout << "The Ice Spit - 2"<<endl;
+        cout << "Dragon Slayer - 3"<<endl;
+        cout << "Excalibur - 4"<<endl;
+        cout << "sharp-tongued sword - 5"<<endl;
+        cout << "The Sower - 6"<<endl;
+    }
+};
+
+class light_purple : public medium
+{
+    public:
+    light_purple()
+    {
+        this->rare = "light_purple";
+
+    }
+    void M3()
+    {
+         cout << "My favorite jacket was light purple. Oh, how nostalgic"<< endl;
+        cout << "                            "<<endl;
+        cout << "----------------------------"<< endl;
+        cout << "                            "<<endl;
+        cout << "Now choose a Sword: " << endl;
+        cout << "The Scythe of Death - 1"<<endl;
+        cout << "The thing - 2"<<endl;
+    }
+};
+
+class lime_rare : public medium
+{
+    public:
+    lime_rare()
+    {
+        this->rare = "lime rare";
+
+    }
+    void M4()
+    {
+        this->rare = "lime rare";
+        cout << "I don't like citrus fruits, ugh"<< endl;
+        cout << "                            "<<endl;
+        cout << "----------------------------"<< endl;
+        cout << "                            "<<endl;
+        cout << "Now choose a Sword: " << endl;
+        cout << "The Chlorophytic saber - 1"<<endl;
+        cout << "Chlorophytic claymer - 2"<<endl;
+        cout << "Khalid's sword - 3"<<endl;
+    }
+};
+
+class red : public medium
+{
+    public:
+    red()
+    {
+        this->rare = "red";
+
+    }
+    void M5()
+    {
+       cout << "red. Not read. Red. Blood. Rage......"<< endl;
+        cout << "                            "<<endl;
+        cout << "----------------------------"<< endl;
+        cout << "                            "<<endl;
+        cout << "Now choose a Sword: " << endl;
+        cout << "Meowmoor - 1"<<endl;
+        cout << "Star fall - 2"<<endl;
     }
 };
 
@@ -490,52 +627,738 @@ public:
     }
 };
 
+class adamantine_sword : public Light_red
+{
+public:
+    adamantine_sword()
+    {
+        sharpness = 40;
+        lvl = 31;
+    }
+
+};
+class White_Laser_Saber : public Light_red
+{
+public:
+    White_Laser_Saber()
+    {
+        sharpness = 35;
+        lvl = 29;
+    }
+
+};
+class The_Destroyer_Blade : public Light_red
+{
+public:
+    The_Destroyer_Blade()
+    {
+        sharpness = 45;
+        lvl = 30;
+    }
+
+};
+class The_Cobalt_Sword : public Light_red
+{
+public:
+    The_Cobalt_Sword()
+    {
+        sharpness = 30;
+        lvl = 30;
+    }
+
+};
+class Elucidator_and_Dark_Repulser : public Light_red
+{
+public:
+    Elucidator_and_Dark_Repulser()
+    {
+        sharpness = 100;
+        lvl = 100;
+        cout <<"These are Kirito's legendary pair of swords from Sword Art Online."<<endl;
+        cout << "It's almost impossible to lose with these swords"<<endl;
+        cout<<"-----------------------"<<endl;
+    }
+
+};
+class The_Mithril_Sword : public Light_red
+{
+public:
+    The_Mithril_Sword()
+    {
+        sharpness = 1;
+        lvl = 1;
+    }
+
+};
+
+class Lambent_Light : public pink
+{
+public:
+    Lambent_Light()
+    {
+        sharpness = 100;
+        lvl = 100;
+        cout<<"Asuna's rapier. A powerful weapon. Very powerful."<<endl;
+        cout<<"(And Asuna is the best girl in the whole anime)"<<endl;
+        cout<<"-----------------------"<<endl;
+    }
+
+};
+class The_Ice_Spit : public pink
+{
+public:
+    The_Ice_Spit()
+    {
+        sharpness = 20;
+        lvl = 60;
+    }
+
+};
+class Dragon_Slayer : public pink
+{
+public:
+    Dragon_Slayer()
+    {
+        sharpness = 100;
+        lvl = 100;
+        cout<<"Happiness"<<endl;
+        cout<<"Happiness"<<endl;
+        cout<<"Happiness"<<endl;
+        cout<<"When will I be happy???"<<endl;
+        cout<<"-----------------------"<<endl;
+    }
+
+};
+
+class Excalibur : public pink
+{
+public:
+    Excalibur()
+    {
+        sharpness = 40;
+        lvl = 35;
+    }
+
+};
+class sharp_tongued_sword : public pink
+{
+public:
+    sharp_tongued_sword()
+    {
+        sharpness = 59;
+        lvl = 40;
+    }
+
+};
+class The_Sower : public pink
+{
+public:
+    The_Sower()
+    {
+        sharpness = 59;
+        lvl = 41;
+    }
+
+};
+
+
+
+class The_Scythe_of_Death : public light_purple
+{
+public:
+    The_Scythe_of_Death()
+    {
+        sharpness = 37;
+        lvl = 41;
+    }
+
+};
+class The_thing : public light_purple
+{
+public:
+    The_thing()
+    {
+        sharpness = 59;
+        lvl = 51;
+    }
+
+};
+
+
+class The_Chlorophytic_saber : public lime_rare
+{
+public:
+    The_Chlorophytic_saber()
+    {
+        sharpness = 59;
+        lvl = 51;
+    }
+
+};
+
+class Chlorophytic_claymer : public lime_rare
+{
+public:
+    Chlorophytic_claymer()
+    {
+        sharpness = 50;
+        lvl = 51;
+    }
+
+};
+class Khalids_sword : public lime_rare
+{
+public:
+    Khalids_sword()
+    {
+        sharpness = 1;
+        lvl = 100;
+        cout<<"This is the sword of one of the game's creators"<<endl;
+        cout<<"It's not very sharp, but it can surprise you"<<endl;
+        cout<<"-----------------------"<<endl;
+    }
+
+};
+
+
+
+class Meowmoor : public red
+{
+public:
+    Meowmoor()
+    {
+        sharpness = 70;
+        lvl = 68;
+    }
+
+};
+
+class Star_fall : public red
+{
+public:
+    Star_fall()
+    {
+        sharpness = 69;
+        lvl = 70;
+    }
+
+};
+
+
+class boss
+{
+    public:
+    boss()
+    {
+        HP = 0;
+        lvl = 0;
+
+    }
+    protected:
+ int HP;
+ int lvl;
+
+};
+
+class Holin : public boss
+{
+    Holin()
+    {
+        HP=10;
+        lvl =1;
+        cout<<"What is temperature?"<<endl;
+        cout<<"This is a very difficult question."<<endl;
+        cout<<"I will not answer it."<<endl;
+        cout<<"---------------------"<<endl;
+    }
+};
+
+class Hitcliff : public boss
+{
+    Hitcliff()
+    {
+        HP=300;
+        lvl =96;
+        cout<<"Let's solve everything with a duel!"<<endl;
+        cout<<"If you win, the game will end."<<endl;
+
+        cout<<"---------------------"<<endl;
+    }
+    void win()
+    {
+        cout <<" "<<endl;
+    }
+
+};
+
 int main()
 {
     char type = 'q';
     char rare_type = 'q';
-    cout<<"Welcome to Terraria Boss fighting, at first you need a weapon."<<endl;
-
+    int sword_choice;
+    
+    cout << "Welcome to Terraria Boss fighting, at first you need a weapon." << endl;
     Swords sword;
-
-    cin>>type;
-
-    if (type == 'Z')
+    sword.callSword();
+    
+    cin >> type;
+    
+    if (type == 'Z')  // Low
+    {
+        Low low;
+        low.lowcall();
+        cin >> rare_type;
+        
+        if (rare_type == 'Z')  // White
         {
-            Low low;
-
-            cin>>rare_type;
-
-            if(rare_type == 'Z')
-            {
-
+            White white;
+            white.callWhite();
+            cin >> sword_choice;
+            
+            switch(sword_choice) {
+                case 1: { 
+                    Ebony e; 
+                    global_sharpness = e.sharpness;  // Обратите внимание: sharpness protected?
+                    global_level = e.lvl;
+                    global_sword_name = "Ebony sword";
+                    break; 
+                }
+                case 2: { 
+                    Silver_Dag s; 
+                    global_sharpness = s.sharpness;
+                    global_level = s.lvl;
+                    global_sword_name = "Silver dagger";
+                    break; 
+                }
+                case 3: { 
+                    Palm p; 
+                    global_sharpness = p.sharpness;
+                    global_level = p.lvl;
+                    global_sword_name = "Palm tree sword";
+                    break; 
+                }
+                case 4: { 
+                    Cactus c; 
+                    global_sharpness = c.sharpness;
+                    global_level = c.lvl;
+                    global_sword_name = "Cactus sword";
+                    break; 
+                }
+                case 5: { 
+                    Copper c; 
+                    global_sharpness = c.sharpness;
+                    global_level = c.lvl;
+                    global_sword_name = "Copper dagger";
+                    break; 
+                }
+                case 6: { 
+                    Wooden w; 
+                    global_sharpness = w.sharpness;
+                    global_level = w.lvl;
+                    global_sword_name = "Wooden sword";
+                    break; 
+                }
+                case 7: { 
+                    Dark_Wooden d; 
+                    global_sharpness = d.sharpness;
+                    global_level = d.lvl;
+                    global_sword_name = "Dark wooden sword";
+                    break; 
+                }
+                default: cout << "Invalid choice!" << endl;
             }
-            if(rare_type == 'X')
-            {
-                
-            }
-            if(rare_type == 'C')
-            {
-                
-            }
-            if(rare_type == 'V')
-            {
-                
-            }
-
         }
-    
-    if (type == 'X')
+        else if (rare_type == 'X')  // Blue
         {
-            medium mid;
+            Blue blue;
+            blue.callBlue();
+            cin >> sword_choice;
+            
+            switch(sword_choice) {
+                case 1: { 
+                    Umbrella u; 
+                    global_sharpness = u.sharpness;
+                    global_level = u.lvl;
+                    global_sword_name = "Umbrella";
+                    break; 
+                }
+                case 2: { 
+                    Caramel c; 
+                    global_sharpness = c.sharpness;
+                    global_level = c.lvl;
+                    global_sword_name = "Caramel sword";
+                    break; 
+                }
+                case 3: { 
+                    Scourge_of_Light s; 
+                    global_sharpness = s.sharpness;
+                    global_level = s.lvl;
+                    global_sword_name = "Scourge of Light";
+                    break; 
+                }
+                case 4: { 
+                    Bloody_ripper b; 
+                    global_sharpness = b.sharpness;
+                    global_level = b.lvl;
+                    global_sword_name = "Bloody Ripper";
+                    break; 
+                }
+                case 5: { 
+                    White_Laser w; 
+                    global_sharpness = w.sharpness;
+                    global_level = w.lvl;
+                    global_sword_name = "White Laser sword";
+                    break; 
+                }
+                case 6: { 
+                    Gladius g; 
+                    global_sharpness = g.sharpness;
+                    global_level = g.lvl;
+                    global_sword_name = "Gladius";
+                    break; 
+                }
+                default: cout << "Invalid choice!" << endl;
+            }
         }
-    
-    if (type == 'C')
+        else if (rare_type == 'C')  // Orange
         {
-             High high;
+            Orange orange;
+            orange.callOrange();
+            cin >> sword_choice;
+            
+            switch(sword_choice) {
+                case 1: { 
+                    Volcane v; 
+                    global_sharpness = v.sharpness;
+                    global_level = v.lvl;
+                    global_sword_name = "Volcane";
+                    break; 
+                }
+                case 2: { 
+                    Beekeeper b; 
+                    global_sharpness = b.sharpness;
+                    global_level = b.lvl;
+                    global_sword_name = "Beekeeper";
+                    break; 
+                }
+                case 3: { 
+                    Edge_of_Night e; 
+                    global_sharpness = e.sharpness;
+                    global_level = e.lvl;
+                    global_sword_name = "Edge of Night";
+                    break; 
+                }
+                case 4: { 
+                    Elegant_cane e; 
+                    global_sharpness = e.sharpness;
+                    global_level = e.lvl;
+                    global_sword_name = "Elegant cane";
+                    break; 
+                }
+                case 5: { 
+                    Bone_sword b; 
+                    global_sharpness = b.sharpness;
+                    global_level = b.lvl;
+                    global_sword_name = "Bone sword";
+                    break; 
+                }
+                case 6: { 
+                    Grass_blade g; 
+                    global_sharpness = g.sharpness;
+                    global_level = g.lvl;
+                    global_sword_name = "Grass blade";
+                    break; 
+                }
+                default: cout << "Invalid choice!" << endl;
+            }
         }
-
+        else if (rare_type == 'V')  // Green
+        {
+            Green green;
+            green.callGreen();
+            cin >> sword_choice;
+            
+            switch(sword_choice) {
+                case 1: { 
+                    Muhophagus m; 
+                    global_sharpness = m.sharpness;
+                    global_level = m.lvl;
+                    global_sword_name = "Muhophagus";
+                    break; 
+                }
+                case 2: { 
+                    Tentacle t; 
+                    global_sharpness = t.sharpness;
+                    global_level = t.lvl;
+                    global_sword_name = "Spiky tentacle";
+                    break; 
+                }
+                case 3: { 
+                    Zhvalo z; 
+                    global_sharpness = z.sharpness;
+                    global_level = z.lvl;
+                    global_sword_name = "Zhvalo sword";
+                    break; 
+                }
+                case 4: { 
+                    Murosama m; 
+                    global_sharpness = m.sharpness;
+                    global_level = m.lvl;
+                    global_sword_name = "Muramasa";
+                    break; 
+                }
+                case 5: { 
+                    Bat b; 
+                    global_sharpness = b.sharpness;
+                    global_level = b.lvl;
+                    global_sword_name = "Mouse baseball bat";
+                    break; 
+                }
+                case 6: { 
+                    Gloves g; 
+                    global_sharpness = g.sharpness;
+                    global_level = g.lvl;
+                    global_sword_name = "Glove with blades";
+                    break; 
+                }
+                default: cout << "Invalid choice!" << endl;
+            }
+        }
+    }
+    else if (type == 'X')  // Medium
+    {
+        medium mid;
+        mid.M();
+        cin >> rare_type;
+        
+        if (rare_type == 'Z')  // Light red
+        {
+            Light_red lr;
+            lr.M1();
+            cin >> sword_choice;
+            
+            switch(sword_choice) {
+                case 1: { 
+                    adamantine_sword a; 
+                    global_sharpness = a.sharpness;
+                    global_level = a.lvl;
+                    global_sword_name = "Adamantine sword";
+                    break; 
+                }
+                case 2: { 
+                    White_Laser_Saber w; 
+                    global_sharpness = w.sharpness;
+                    global_level = w.lvl;
+                    global_sword_name = "White Laser Saber";
+                    break; 
+                }
+                case 3: { 
+                    The_Destroyer_Blade d; 
+                    global_sharpness = d.sharpness;
+                    global_level = d.lvl;
+                    global_sword_name = "The Destroyer Blade";
+                    break; 
+                }
+                case 4: { 
+                    The_Cobalt_Sword c; 
+                    global_sharpness = c.sharpness;
+                    global_level = c.lvl;
+                    global_sword_name = "The Cobalt Sword";
+                    break; 
+                }
+                case 5: { 
+                    Elucidator_and_Dark_Repulser e; 
+                    global_sharpness = e.sharpness;
+                    global_level = e.lvl;
+                    global_sword_name = "Elucidator and Dark Repulser";
+                    break; 
+                }
+                case 6: { 
+                    The_Mithril_Sword m; 
+                    global_sharpness = m.sharpness;
+                    global_level = m.lvl;
+                    global_sword_name = "The Mithril Sword";
+                    break; 
+                }
+                default: cout << "Invalid choice!" << endl;
+            }
+        }
+        else if (rare_type == 'X')  // Pink
+        {
+            pink p;
+            p.M2();
+            cin >> sword_choice;
+            
+            switch(sword_choice) {
+                case 1: { 
+                    Lambent_Light l; 
+                    global_sharpness = l.sharpness;
+                    global_level = l.lvl;
+                    global_sword_name = "Lambent Light";
+                    break; 
+                }
+                case 2: { 
+                    The_Ice_Spit i; 
+                    global_sharpness = i.sharpness;
+                    global_level = i.lvl;
+                    global_sword_name = "The Ice Spit";
+                    break; 
+                }
+                case 3: { 
+                    Dragon_Slayer d; 
+                    global_sharpness = d.sharpness;
+                    global_level = d.lvl;
+                    global_sword_name = "Dragon Slayer";
+                    break; 
+                }
+                case 4: { 
+                    Excalibur e; 
+                    global_sharpness = e.sharpness;
+                    global_level = e.lvl;
+                    global_sword_name = "Excalibur";
+                    break; 
+                }
+                case 5: { 
+                    sharp_tongued_sword s; 
+                    global_sharpness = s.sharpness;
+                    global_level = s.lvl;
+                    global_sword_name = "Sharp-tongued sword";
+                    break; 
+                }
+                case 6: { 
+                    The_Sower t; 
+                    global_sharpness = t.sharpness;
+                    global_level = t.lvl;
+                    global_sword_name = "The Sower";
+                    break; 
+                }
+                default: cout << "Invalid choice!" << endl;
+            }
+        }
+        else if (rare_type == 'C')  // Light purple
+        {
+            light_purple lp;
+            lp.M3();
+            cin >> sword_choice;
+            
+            switch(sword_choice) {
+                case 1: { 
+                    The_Scythe_of_Death s; 
+                    global_sharpness = s.sharpness;
+                    global_level = s.lvl;
+                    global_sword_name = "The Scythe of Death";
+                    break; 
+                }
+                case 2: { 
+                    The_thing t; 
+                    global_sharpness = t.sharpness;
+                    global_level = t.lvl;
+                    global_sword_name = "The thing";
+                    break; 
+                }
+                default: cout << "Invalid choice!" << endl;
+            }
+        }
+        else if (rare_type == 'V')  // Lime
+        {
+            lime_rare lime;
+            lime.M4();
+            cin >> sword_choice;
+            
+            switch(sword_choice) {
+                case 1: { 
+                    The_Chlorophytic_saber c; 
+                    global_sharpness = c.sharpness;
+                    global_level = c.lvl;
+                    global_sword_name = "The Chlorophytic saber";
+                    break; 
+                }
+                case 2: { 
+                    Chlorophytic_claymer c; 
+                    global_sharpness = c.sharpness;
+                    global_level = c.lvl;
+                    global_sword_name = "Chlorophytic claymer";
+                    break; 
+                }
+                case 3: { 
+                    Khalids_sword k; 
+                    global_sharpness = k.sharpness;
+                    global_level = k.lvl;
+                    global_sword_name = "Khalid's sword";
+                    break; 
+                }
+                default: cout << "Invalid choice!" << endl;
+            }
+        }
+    }
+    else if (type == 'C')  // High
+    {
+        High high;
+        high.callHigh();
+        cin >> rare_type;
+        
+        if (rare_type == 'Z')  // Yellow
+        {
+            Yellow yellow;
+            yellow.callYellow();
+            cin >> sword_choice;
+            
+            switch(sword_choice) {
+                case 1: { 
+                    ChristmasTreeSword c; 
+                    global_sharpness = c.sharpness;
+                    global_level = c.lvl;
+                    global_sword_name = "Christmas tree sword";
+                    break; 
+                }
+                case 2: { 
+                    TrueExcalibur t; 
+                    global_sharpness = t.sharpness;
+                    global_level = t.lvl;
+                    global_sword_name = "True Excalibur";
+                    break; 
+                }
+                case 3: { 
+                    HorsemansBlade h; 
+                    global_sharpness = h.sharpness;
+                    global_level = h.lvl;
+                    global_sword_name = "Horseman's blade";
+                    break; 
+                }
+                case 4: { 
+                    KeySword k; 
+                    global_sharpness = k.sharpness;
+                    global_level = k.lvl;
+                    global_sword_name = "Key-sword";
+                    break; 
+                }
+                case 5: { 
+                    ManiacsKnife m; 
+                    global_sharpness = m.sharpness;
+                    global_level = m.lvl;
+                    global_sword_name = "Maniac's knife";
+                    break; 
+                }
+                case 6: { 
+                    SoaringDragon s; 
+                    global_sharpness = s.sharpness;
+                    global_level = s.lvl;
+                    global_sword_name = "Soaring dragon";
+                    break; 
+                }
+                default: cout << "Invalid choice!" << endl;
+            }
+        }
+    }
     
-
+    // Вывод информации о выбранном мече
+    if (global_sharpness > 0) {
+        cout << "\n=== ВЫБРАН МЕЧ ===" << endl;
+        cout << "Название: " << global_sword_name << endl;
+        cout << "Острота: " << global_sharpness << endl;
+        cout << "Уровень: " << global_level << endl;
+        cout << "==================\n" << endl;
+    }
     
+    return 0;
 }
