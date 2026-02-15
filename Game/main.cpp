@@ -950,13 +950,13 @@ int main()
 
     sf::Music music;
     if (!music.openFromFile("Jacal.ogg")) {
-        cout << "Не удалось загрузить музыку!" << endl;
+        cout << "Can`t find music!" << endl;
         // НЕ возвращаем -1, чтобы игра работала даже без музыки
     } else {
         music.setLoop(true);   // Зациклить
         music.setVolume(50);   // Громкость 50%
         music.play();           // 👈 ЗАПУСКАЕМ МУЗЫКУ!
-        cout << "🎵 Музыка играет! 🎵" << endl;
+        cout << "🎵 Music plays! 🎵" << endl;
     }
     
     while(playAgain){
@@ -971,7 +971,7 @@ int main()
     cin >> type;
 
     if (type != 'Z' && type != 'X' && type != 'C') {
-            cout << "Неверный ввод! Попробуйте снова." << endl;
+            cout << "Wrong, try again." << endl;
             continue;
         }
     
@@ -982,7 +982,7 @@ int main()
         cin >> rare_type;
 
         if (rare_type != 'Z' && rare_type != 'X' && rare_type != 'C' && rare_type != 'V') {
-            cout << "Неверный ввод! Попробуйте снова." << endl;
+            cout << "Wrong, try again." << endl;
             continue;
         }
         
@@ -993,7 +993,7 @@ int main()
             cin >> sword_choice;
 
             if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6 && sword_choice != 7) {
-            cout << "Неверный ввод! Попробуйте снова." << endl;
+            cout << "Wrong, try again." << endl;
             continue;
         }
             
@@ -1057,7 +1057,7 @@ int main()
             cin >> sword_choice;
 
             if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6) {
-            cout << "Неверный ввод! Попробуйте снова." << endl;
+            cout << "Wrong, try again." << endl;
             continue;
         }
             
@@ -1114,7 +1114,7 @@ int main()
             cin >> sword_choice;
 
             if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6) {
-            cout << "Неверный ввод! Попробуйте снова." << endl;
+            cout << "Wrong, try again." << endl;
             continue;
         }
             
@@ -1171,7 +1171,7 @@ int main()
             cin >> sword_choice;
 
             if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6) {
-            cout << "Неверный ввод! Попробуйте снова." << endl;
+            cout << "Wrong, try again." << endl;
             continue;
         }
             
@@ -1237,7 +1237,7 @@ int main()
             cin >> sword_choice;
 
             if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6) {
-            cout << "Неверный ввод! Попробуйте снова." << endl;
+            cout << "Wrong, try again." << endl;
             continue;
         }
             
@@ -1294,7 +1294,7 @@ int main()
             cin >> sword_choice;
 
             if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6 ) {
-            cout << "Неверный ввод! Попробуйте снова." << endl;
+            cout << "Wrong, try again." << endl;
             continue;
         }
             
@@ -1351,7 +1351,7 @@ int main()
             cin >> sword_choice;
 
             if (sword_choice != 1 && sword_choice != 2) {
-            cout << "Неверный ввод! Попробуйте снова." << endl;
+            cout << "Wrong, try again." << endl;
             continue;
         }
             
@@ -1380,7 +1380,7 @@ int main()
             cin >> sword_choice;
 
             if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3) {
-            cout << "Неверный ввод! Попробуйте снова." << endl;
+            cout << "Wrong, try again." << endl;
             continue;
         }
             
@@ -1423,7 +1423,7 @@ int main()
             cin >> sword_choice;
 
             if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6) {
-            cout << "Неверный ввод! Попробуйте снова." << endl;
+            cout << "Wrong, try again." << endl;
             continue;
         }
             
@@ -1477,14 +1477,14 @@ int main()
     
     // Вывод информации о выбранном мече
     if (global_sharpness > 0) {
-        cout << "\n=== ВЫБРАН МЕЧ ===" << endl;
-        cout << "Название: " << global_sword_name << endl;
-        cout << "Острота: " << global_sharpness << endl;
-        cout << "Уровень: " << global_level << endl;
+        cout << "\n=== SWORD SELECTED ===" << endl;
+        cout << "Name: " << global_sword_name << endl;
+        cout << "Sharpness: " << global_sharpness << endl;
+        cout << "Level: " << global_level << endl;
         cout << "==================\n" << endl;
     }
     
-    cout<<"Пора сразиться с боссом, выбери своего противника!"<<endl;
+    cout<<"It`s time to fight a boss, choose your enemy!"<<endl;
     cout<<"Holin - A, Hitkliff -B, Lepus - C"<<endl;
 
     char boss_type = 'q';
