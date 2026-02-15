@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class Swords
@@ -10,25 +11,20 @@ public:
         sharpness = 0;
         lvl = 0;
         rare = "none";
-        if (firstCall) {
+    }
+        void callSword() {
             cout << "Lets pick a sword" << endl;
             cout << "At first, choose a rare class:" << endl;
             cout << "Low - Z" << endl;
             cout << "Medium - X" << endl;
             cout << "High - C" << endl;
-            firstCall = false;
         }
-    }
 
 protected:
-
-    static bool firstCall;
     int sharpness;
     int lvl;
     string rare;
 };
-
-bool Swords::firstCall = true;
 
 class Low: public Swords
 {
@@ -36,9 +32,11 @@ public:
     Low()
     {
         this->rare = "Low";
+    }
+        void lowcall(){
         cout<<"Now choose a rare:"<<endl;
         cout<<"White rare - Z, Blue rare - X, Orange rare - C, Green rare - V"<<endl;
-    }
+        }
 
 };
 
@@ -48,6 +46,8 @@ public:
     High()
     {
         this->rare = "high";
+    }
+    void callHigh(){
         cout<<"Now choose a rare:"<<endl;
         cout<<"Yellow rare - Z, Red rare - X"<<endl;
     }
@@ -60,13 +60,16 @@ public:
     White()
     {
         this->rare = "White";
+    }
+    void callWhite()
+    {
         cout<<"Great, you choose white rare, rather dumb idea, heh"<<endl;
         cout<<"it`s time to take your sword and rush into a battle"<<endl;
         cout<<"The ebony sword - 1, The silver dagger - 2"<<endl;
         cout<<"a palm tree sword - 3, The cactus sword - 4"<<endl;
         cout<<"The copper dagger - 5, Wooden sword - 6"<<endl;
         cout<<"Dark wood sword - 7"<<endl;
-    };
+    }
 };
 
 class Blue: public Low
@@ -75,6 +78,9 @@ public:
     Blue()
     {
         this->rare = "Blue";
+    }
+    void callBlue()
+    {
         cout<<"Great, you choose blue rare, you really love tryharding, yeah?"<<endl;
         cout<<"it`s time to take your sword and rush into a battle"<<endl;
         cout<<"Umbrella - 1, Caramel sword - 2"<<endl;
@@ -89,6 +95,9 @@ public:
     Orange()
     {
         this->rare = "Orange";
+    }
+    void callOrange()
+    {
         cout<<"Great, you choose orange rare, you really love to show off, yeah?"<<endl;
         cout<<"it`s time to take your sword and rush into a battle"<<endl;
         cout<<"Volcane- 1, Beekeeper - 2"<<endl;
@@ -103,6 +112,9 @@ public:
     Green()
     {
         this->rare = "Orange";
+    }
+    void callGreen()
+    {
         cout<<"Great, you choose Green rare, not bad"<<endl;
         cout<<"it`s time to take your sword and rush into a battle"<<endl;
         cout<<"muhophagus - 1, a spiky tentacle- 2"<<endl;
@@ -117,6 +129,8 @@ public:
     Yellow()
     {
         this->rare = "Yellow";
+    }
+    void callYellow(){
         cout<<"Great, you choose Yellow rare, you really love to show off, yeah?"<<endl;
         cout<<"it`s time to take your sword and rush into a battle"<<endl;
         cout<<"The Christmas tree sword - 1, The true Excalibur- 2"<<endl;
@@ -476,8 +490,52 @@ public:
     }
 };
 
+int main()
+{
+    char type = 'q';
+    char rare_type = 'q';
+    cout<<"Welcome to Terraria Boss fighting, at first you need a weapon."<<endl;
 
+    Swords sword;
 
+    cin>>type;
 
+    if (type == 'Z')
+        {
+            Low low;
 
+            cin>>rare_type;
 
+            if(rare_type == 'Z')
+            {
+
+            }
+            if(rare_type == 'X')
+            {
+                
+            }
+            if(rare_type == 'C')
+            {
+                
+            }
+            if(rare_type == 'V')
+            {
+                
+            }
+
+        }
+    
+    if (type == 'X')
+        {
+            medium mid;
+        }
+    
+    if (type == 'C')
+        {
+             High high;
+        }
+
+    
+
+    
+}
