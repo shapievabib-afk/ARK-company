@@ -957,18 +957,33 @@ int main()
     sword.callSword();
     
     cin >> type;
+
+    if (type != 'Z' && type != 'X' && type != 'C') {
+            cout << "Неверный ввод! Попробуйте снова." << endl;
+            continue;
+        }
     
     if (type == 'Z')  // Low
     {
         Low low;
         low.lowcall();
         cin >> rare_type;
+
+        if (rare_type != 'Z' && rare_type != 'X' && rare_type != 'C' && rare_type != 'V') {
+            cout << "Неверный ввод! Попробуйте снова." << endl;
+            continue;
+        }
         
         if (rare_type == 'Z')  // White
         {
             White white;
             white.callWhite();
             cin >> sword_choice;
+
+            if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6 && sword_choice != 7) {
+            cout << "Неверный ввод! Попробуйте снова." << endl;
+            continue;
+        }
             
             switch(sword_choice) {
                 case 1: { 
@@ -1028,6 +1043,11 @@ int main()
             Blue blue;
             blue.callBlue();
             cin >> sword_choice;
+
+            if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6) {
+            cout << "Неверный ввод! Попробуйте снова." << endl;
+            continue;
+        }
             
             switch(sword_choice) {
                 case 1: { 
@@ -1080,6 +1100,11 @@ int main()
             Orange orange;
             orange.callOrange();
             cin >> sword_choice;
+
+            if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6) {
+            cout << "Неверный ввод! Попробуйте снова." << endl;
+            continue;
+        }
             
             switch(sword_choice) {
                 case 1: { 
@@ -1132,6 +1157,11 @@ int main()
             Green green;
             green.callGreen();
             cin >> sword_choice;
+
+            if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6) {
+            cout << "Неверный ввод! Попробуйте снова." << endl;
+            continue;
+        }
             
             switch(sword_choice) {
                 case 1: { 
@@ -1185,12 +1215,19 @@ int main()
         medium mid;
         mid.M();
         cin >> rare_type;
+
+        
         
         if (rare_type == 'Z')  // Light red
         {
             Light_red lr;
             lr.M1();
             cin >> sword_choice;
+
+            if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6) {
+            cout << "Неверный ввод! Попробуйте снова." << endl;
+            continue;
+        }
             
             switch(sword_choice) {
                 case 1: { 
@@ -1243,6 +1280,11 @@ int main()
             pink p;
             p.M2();
             cin >> sword_choice;
+
+            if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6 ) {
+            cout << "Неверный ввод! Попробуйте снова." << endl;
+            continue;
+        }
             
             switch(sword_choice) {
                 case 1: { 
@@ -1295,6 +1337,11 @@ int main()
             light_purple lp;
             lp.M3();
             cin >> sword_choice;
+
+            if (sword_choice != 1 && sword_choice != 2) {
+            cout << "Неверный ввод! Попробуйте снова." << endl;
+            continue;
+        }
             
             switch(sword_choice) {
                 case 1: { 
@@ -1319,6 +1366,11 @@ int main()
             lime_rare lime;
             lime.M4();
             cin >> sword_choice;
+
+            if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3) {
+            cout << "Неверный ввод! Попробуйте снова." << endl;
+            continue;
+        }
             
             switch(sword_choice) {
                 case 1: { 
@@ -1357,6 +1409,11 @@ int main()
             Yellow yellow;
             yellow.callYellow();
             cin >> sword_choice;
+
+            if (sword_choice != 1 && sword_choice != 2 && sword_choice != 3 && sword_choice != 4 && sword_choice != 5 && sword_choice != 6) {
+            cout << "Неверный ввод! Попробуйте снова." << endl;
+            continue;
+        }
             
             switch(sword_choice) {
                 case 1: { 
@@ -1429,6 +1486,7 @@ int main()
         {
         cout<<"The fight begins now!"<<endl;
         cout<<"Beat him with three shots"<<endl;
+        cout<<"Your Summary damage is "<<3 * global_sharpness<<endl;
         cout<<"Boss HP:"<<h.HP<<endl;
 
         if (h.HP <= 3 * global_sharpness)
@@ -1465,6 +1523,7 @@ int main()
         {
         cout<<"The fight begins now!"<<endl;
         cout<<"Beat him with three shots"<<endl;
+        cout<<"Your Summary damage is "<<3 * global_sharpness<<endl;
         cout<<"Boss HP:"<<s.HP<<endl;
 
         if (s.HP <= 3 * global_sharpness)
@@ -1501,6 +1560,7 @@ int main()
         {
         cout<<"The fight begins now!"<<endl;
         cout<<"Beat him with three shots"<<endl;
+        cout<<"Your Summary damage is "<<3 * global_sharpness<<endl;
         cout<<"Boss HP:"<<L.HP<<endl;
 
         if (L.HP <= 3 * global_sharpness)
