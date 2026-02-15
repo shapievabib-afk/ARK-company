@@ -1,12 +1,50 @@
 #include <iostream>
 #include <string>
 #include <SFML/Audio.hpp>
+#include <filesystem>
+#include <filesystem>
+#ifdef _WIN32
+#include <windows.h>
+#elif defined(__linux__)
+#include <unistd.h>
+#include <limits.h>
+#elif defined(__APPLE__)
+#include <mach-o/dyld.h>
+#include <limits.h>
+#endif
 
 using namespace std;
 
 int global_sharpness = 0;
 int global_level = 0;
 string global_sword_name = "";
+
+////////////////////// сделано нейронкой
+
+std::string getExecutableDir() {
+#ifdef _WIN32
+    char path[MAX_PATH];
+    GetModuleFileNameA(nullptr, path, MAX_PATH);
+    return std::filesystem::path(path).parent_path().string();
+#elif defined(__linux__)
+    char path[PATH_MAX];
+    ssize_t len = readlink("/proc/self/exe", path, sizeof(path)-1);
+    if (len != -1) {
+        path[len] = '\0';
+        return std::filesystem::path(path).parent_path().string();
+    }
+#elif defined(__APPLE__)
+    char path[PATH_MAX];
+    uint32_t size = sizeof(path);
+    if (_NSGetExecutablePath(path, &size) == 0) {
+        return std::filesystem::path(path).parent_path().string();
+    }
+#endif
+    // fallback – вернуть текущую рабочую директорию
+    return std::filesystem::current_path().string();
+}
+
+////////////////////// сделано нейронкой
 
 class Swords
 {
@@ -943,21 +981,36 @@ public:
 
 };
 
+string getResourcePath(const std::string& filename) {
+    std::filesystem::path exePath = std::filesystem::current_path(); // или можно получить путь к exe
+    return (exePath / "resources" / filename).string();
+}
+
 int main()
 {
 
     bool playAgain = true;
 
     sf::Music music;
+std::string exeDir = getExecutableDir();
+std::filesystem::path musicPath = std::filesystem::path(exeDir) / "resources" / "Jacal.ogg";
+
+if (!music.openFromFile(musicPath.string())) {
+    // Если не нашли в resources/, пробуем просто имя файла (на случай, если кто-то положил ogg рядом с exe)
     if (!music.openFromFile("Jacal.ogg")) {
-        cout << "Can`t find music!" << endl;
-        // НЕ возвращаем -1, чтобы игра работала даже без музыки
+        std::cout << "Can't find music!" << std::endl;
     } else {
-        music.setLoop(true);   // Зациклить
-        music.setVolume(50);   // Громкость 50%
-        music.play();           // 👈 ЗАПУСКАЕМ МУЗЫКУ!
-        cout << "🎵 Music plays! 🎵" << endl;
+        music.setLoop(true);
+        music.setVolume(50);
+        music.play();
+        std::cout << "🎵 Music plays! (from current dir) 🎵" << std::endl;
     }
+} else {
+    music.setLoop(true);
+    music.setVolume(50);
+    music.play();
+    std::cout << "🎵 Music plays from resources folder! 🎵" << std::endl;
+}
     
     while(playAgain){
     char type = 'q';
