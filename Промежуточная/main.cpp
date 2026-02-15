@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <SFML/Audio.hpp>
+
 
 using namespace std;
 
@@ -948,33 +948,23 @@ int main()
 
     bool playAgain = true;
 
-    sf::Music music;
-    if (!music.openFromFile("Jacal.ogg")) {
-        cout << "Не удалось загрузить музыку!" << endl;
-        // НЕ возвращаем -1, чтобы игра работала даже без музыки
-    } else {
-        music.setLoop(true);   // Зациклить
-        music.setVolume(50);   // Громкость 50%
-        music.play();           // 👈 ЗАПУСКАЕМ МУЗЫКУ!
-        cout << "🎵 Музыка играет! 🎵" << endl;
-    }
-    
+
     while(playAgain){
     char type = 'q';
     char rare_type = 'q';
     int sword_choice;
-    
+
     cout << "Welcome to Terraria Boss fighting, at first you need a weapon." << endl;
     Swords sword;
     sword.callSword();
-    
+
     cin >> type;
 
     if (type != 'Z' && type != 'X' && type != 'C') {
             cout << "Неверный ввод! Попробуйте снова." << endl;
             continue;
         }
-    
+
     if (type == 'Z')  // Low
     {
         Low low;
@@ -985,7 +975,7 @@ int main()
             cout << "Неверный ввод! Попробуйте снова." << endl;
             continue;
         }
-        
+
         if (rare_type == 'Z')  // White
         {
             White white;
@@ -996,56 +986,56 @@ int main()
             cout << "Неверный ввод! Попробуйте снова." << endl;
             continue;
         }
-            
+
             switch(sword_choice) {
-                case 1: { 
-                    Ebony e; 
+                case 1: {
+                    Ebony e;
                     global_sharpness = e.sharpness;  // Обратите внимание: sharpness protected?
                     global_level = e.lvl;
                     global_sword_name = "Ebony sword";
-                    break; 
+                    break;
                 }
-                case 2: { 
-                    Silver_Dag s; 
+                case 2: {
+                    Silver_Dag s;
                     global_sharpness = s.sharpness;
                     global_level = s.lvl;
                     global_sword_name = "Silver dagger";
-                    break; 
+                    break;
                 }
-                case 3: { 
-                    Palm p; 
+                case 3: {
+                    Palm p;
                     global_sharpness = p.sharpness;
                     global_level = p.lvl;
                     global_sword_name = "Palm tree sword";
-                    break; 
+                    break;
                 }
-                case 4: { 
-                    Cactus c; 
+                case 4: {
+                    Cactus c;
                     global_sharpness = c.sharpness;
                     global_level = c.lvl;
                     global_sword_name = "Cactus sword";
-                    break; 
+                    break;
                 }
-                case 5: { 
-                    Copper c; 
+                case 5: {
+                    Copper c;
                     global_sharpness = c.sharpness;
                     global_level = c.lvl;
                     global_sword_name = "Copper dagger";
-                    break; 
+                    break;
                 }
-                case 6: { 
-                    Wooden w; 
+                case 6: {
+                    Wooden w;
                     global_sharpness = w.sharpness;
                     global_level = w.lvl;
                     global_sword_name = "Wooden sword";
-                    break; 
+                    break;
                 }
-                case 7: { 
-                    Dark_Wooden d; 
+                case 7: {
+                    Dark_Wooden d;
                     global_sharpness = d.sharpness;
                     global_level = d.lvl;
                     global_sword_name = "Dark wooden sword";
-                    break; 
+                    break;
                 }
                 default: cout << "Invalid choice!" << endl;
             }
@@ -1060,49 +1050,49 @@ int main()
             cout << "Неверный ввод! Попробуйте снова." << endl;
             continue;
         }
-            
+
             switch(sword_choice) {
-                case 1: { 
-                    Umbrella u; 
+                case 1: {
+                    Umbrella u;
                     global_sharpness = u.sharpness;
                     global_level = u.lvl;
                     global_sword_name = "Umbrella";
-                    break; 
+                    break;
                 }
-                case 2: { 
-                    Caramel c; 
+                case 2: {
+                    Caramel c;
                     global_sharpness = c.sharpness;
                     global_level = c.lvl;
                     global_sword_name = "Caramel sword";
-                    break; 
+                    break;
                 }
-                case 3: { 
-                    Scourge_of_Light s; 
+                case 3: {
+                    Scourge_of_Light s;
                     global_sharpness = s.sharpness;
                     global_level = s.lvl;
                     global_sword_name = "Scourge of Light";
-                    break; 
+                    break;
                 }
-                case 4: { 
-                    Bloody_ripper b; 
+                case 4: {
+                    Bloody_ripper b;
                     global_sharpness = b.sharpness;
                     global_level = b.lvl;
                     global_sword_name = "Bloody Ripper";
-                    break; 
+                    break;
                 }
-                case 5: { 
-                    White_Laser w; 
+                case 5: {
+                    White_Laser w;
                     global_sharpness = w.sharpness;
                     global_level = w.lvl;
                     global_sword_name = "White Laser sword";
-                    break; 
+                    break;
                 }
-                case 6: { 
-                    Gladius g; 
+                case 6: {
+                    Gladius g;
                     global_sharpness = g.sharpness;
                     global_level = g.lvl;
                     global_sword_name = "Gladius";
-                    break; 
+                    break;
                 }
                 default: cout << "Invalid choice!" << endl;
             }
@@ -1117,49 +1107,49 @@ int main()
             cout << "Неверный ввод! Попробуйте снова." << endl;
             continue;
         }
-            
+
             switch(sword_choice) {
-                case 1: { 
-                    Volcane v; 
+                case 1: {
+                    Volcane v;
                     global_sharpness = v.sharpness;
                     global_level = v.lvl;
                     global_sword_name = "Volcane";
-                    break; 
+                    break;
                 }
-                case 2: { 
-                    Beekeeper b; 
+                case 2: {
+                    Beekeeper b;
                     global_sharpness = b.sharpness;
                     global_level = b.lvl;
                     global_sword_name = "Beekeeper";
-                    break; 
+                    break;
                 }
-                case 3: { 
-                    Edge_of_Night e; 
+                case 3: {
+                    Edge_of_Night e;
                     global_sharpness = e.sharpness;
                     global_level = e.lvl;
                     global_sword_name = "Edge of Night";
-                    break; 
+                    break;
                 }
-                case 4: { 
-                    Elegant_cane e; 
+                case 4: {
+                    Elegant_cane e;
                     global_sharpness = e.sharpness;
                     global_level = e.lvl;
                     global_sword_name = "Elegant cane";
-                    break; 
+                    break;
                 }
-                case 5: { 
-                    Bone_sword b; 
+                case 5: {
+                    Bone_sword b;
                     global_sharpness = b.sharpness;
                     global_level = b.lvl;
                     global_sword_name = "Bone sword";
-                    break; 
+                    break;
                 }
-                case 6: { 
-                    Grass_blade g; 
+                case 6: {
+                    Grass_blade g;
                     global_sharpness = g.sharpness;
                     global_level = g.lvl;
                     global_sword_name = "Grass blade";
-                    break; 
+                    break;
                 }
                 default: cout << "Invalid choice!" << endl;
             }
@@ -1174,49 +1164,49 @@ int main()
             cout << "Неверный ввод! Попробуйте снова." << endl;
             continue;
         }
-            
+
             switch(sword_choice) {
-                case 1: { 
-                    Muhophagus m; 
+                case 1: {
+                    Muhophagus m;
                     global_sharpness = m.sharpness;
                     global_level = m.lvl;
                     global_sword_name = "Muhophagus";
-                    break; 
+                    break;
                 }
-                case 2: { 
-                    Tentacle t; 
+                case 2: {
+                    Tentacle t;
                     global_sharpness = t.sharpness;
                     global_level = t.lvl;
                     global_sword_name = "Spiky tentacle";
-                    break; 
+                    break;
                 }
-                case 3: { 
-                    Zhvalo z; 
+                case 3: {
+                    Zhvalo z;
                     global_sharpness = z.sharpness;
                     global_level = z.lvl;
                     global_sword_name = "Zhvalo sword";
-                    break; 
+                    break;
                 }
-                case 4: { 
-                    Murosama m; 
+                case 4: {
+                    Murosama m;
                     global_sharpness = m.sharpness;
                     global_level = m.lvl;
                     global_sword_name = "Muramasa";
-                    break; 
+                    break;
                 }
-                case 5: { 
-                    Bat b; 
+                case 5: {
+                    Bat b;
                     global_sharpness = b.sharpness;
                     global_level = b.lvl;
                     global_sword_name = "Mouse baseball bat";
-                    break; 
+                    break;
                 }
-                case 6: { 
-                    Gloves g; 
+                case 6: {
+                    Gloves g;
                     global_sharpness = g.sharpness;
                     global_level = g.lvl;
                     global_sword_name = "Glove with blades";
-                    break; 
+                    break;
                 }
                 default: cout << "Invalid choice!" << endl;
             }
@@ -1228,8 +1218,8 @@ int main()
         mid.M();
         cin >> rare_type;
 
-        
-        
+
+
         if (rare_type == 'Z')  // Light red
         {
             Light_red lr;
@@ -1240,49 +1230,49 @@ int main()
             cout << "Неверный ввод! Попробуйте снова." << endl;
             continue;
         }
-            
+
             switch(sword_choice) {
-                case 1: { 
-                    adamantine_sword a; 
+                case 1: {
+                    adamantine_sword a;
                     global_sharpness = a.sharpness;
                     global_level = a.lvl;
                     global_sword_name = "Adamantine sword";
-                    break; 
+                    break;
                 }
-                case 2: { 
-                    White_Laser_Saber w; 
+                case 2: {
+                    White_Laser_Saber w;
                     global_sharpness = w.sharpness;
                     global_level = w.lvl;
                     global_sword_name = "White Laser Saber";
-                    break; 
+                    break;
                 }
-                case 3: { 
-                    The_Destroyer_Blade d; 
+                case 3: {
+                    The_Destroyer_Blade d;
                     global_sharpness = d.sharpness;
                     global_level = d.lvl;
                     global_sword_name = "The Destroyer Blade";
-                    break; 
+                    break;
                 }
-                case 4: { 
-                    The_Cobalt_Sword c; 
+                case 4: {
+                    The_Cobalt_Sword c;
                     global_sharpness = c.sharpness;
                     global_level = c.lvl;
                     global_sword_name = "The Cobalt Sword";
-                    break; 
+                    break;
                 }
-                case 5: { 
-                    Elucidator_and_Dark_Repulser e; 
+                case 5: {
+                    Elucidator_and_Dark_Repulser e;
                     global_sharpness = e.sharpness;
                     global_level = e.lvl;
                     global_sword_name = "Elucidator and Dark Repulser";
-                    break; 
+                    break;
                 }
-                case 6: { 
-                    The_Mithril_Sword m; 
+                case 6: {
+                    The_Mithril_Sword m;
                     global_sharpness = m.sharpness;
                     global_level = m.lvl;
                     global_sword_name = "The Mithril Sword";
-                    break; 
+                    break;
                 }
                 default: cout << "Invalid choice!" << endl;
             }
@@ -1297,49 +1287,49 @@ int main()
             cout << "Неверный ввод! Попробуйте снова." << endl;
             continue;
         }
-            
+
             switch(sword_choice) {
-                case 1: { 
-                    Lambent_Light l; 
+                case 1: {
+                    Lambent_Light l;
                     global_sharpness = l.sharpness;
                     global_level = l.lvl;
                     global_sword_name = "Lambent Light";
-                    break; 
+                    break;
                 }
-                case 2: { 
-                    The_Ice_Spit i; 
+                case 2: {
+                    The_Ice_Spit i;
                     global_sharpness = i.sharpness;
                     global_level = i.lvl;
                     global_sword_name = "The Ice Spit";
-                    break; 
+                    break;
                 }
-                case 3: { 
-                    Dragon_Slayer d; 
+                case 3: {
+                    Dragon_Slayer d;
                     global_sharpness = d.sharpness;
                     global_level = d.lvl;
                     global_sword_name = "Dragon Slayer";
-                    break; 
+                    break;
                 }
-                case 4: { 
-                    Excalibur e; 
+                case 4: {
+                    Excalibur e;
                     global_sharpness = e.sharpness;
                     global_level = e.lvl;
                     global_sword_name = "Excalibur";
-                    break; 
+                    break;
                 }
-                case 5: { 
-                    sharp_tongued_sword s; 
+                case 5: {
+                    sharp_tongued_sword s;
                     global_sharpness = s.sharpness;
                     global_level = s.lvl;
                     global_sword_name = "Sharp-tongued sword";
-                    break; 
+                    break;
                 }
-                case 6: { 
-                    The_Sower t; 
+                case 6: {
+                    The_Sower t;
                     global_sharpness = t.sharpness;
                     global_level = t.lvl;
                     global_sword_name = "The Sower";
-                    break; 
+                    break;
                 }
                 default: cout << "Invalid choice!" << endl;
             }
@@ -1354,21 +1344,21 @@ int main()
             cout << "Неверный ввод! Попробуйте снова." << endl;
             continue;
         }
-            
+
             switch(sword_choice) {
-                case 1: { 
-                    The_Scythe_of_Death s; 
+                case 1: {
+                    The_Scythe_of_Death s;
                     global_sharpness = s.sharpness;
                     global_level = s.lvl;
                     global_sword_name = "The Scythe of Death";
-                    break; 
+                    break;
                 }
-                case 2: { 
-                    The_thing t; 
+                case 2: {
+                    The_thing t;
                     global_sharpness = t.sharpness;
                     global_level = t.lvl;
                     global_sword_name = "The thing";
-                    break; 
+                    break;
                 }
                 default: cout << "Invalid choice!" << endl;
             }
@@ -1383,28 +1373,28 @@ int main()
             cout << "Неверный ввод! Попробуйте снова." << endl;
             continue;
         }
-            
+
             switch(sword_choice) {
-                case 1: { 
-                    The_Chlorophytic_saber c; 
+                case 1: {
+                    The_Chlorophytic_saber c;
                     global_sharpness = c.sharpness;
                     global_level = c.lvl;
                     global_sword_name = "The Chlorophytic saber";
-                    break; 
+                    break;
                 }
-                case 2: { 
-                    Chlorophytic_claymer c; 
+                case 2: {
+                    Chlorophytic_claymer c;
                     global_sharpness = c.sharpness;
                     global_level = c.lvl;
                     global_sword_name = "Chlorophytic claymer";
-                    break; 
+                    break;
                 }
-                case 3: { 
-                    Khalids_sword k; 
+                case 3: {
+                    Khalids_sword k;
                     global_sharpness = k.sharpness;
                     global_level = k.lvl;
                     global_sword_name = "Khalid's sword";
-                    break; 
+                    break;
                 }
                 default: cout << "Invalid choice!" << endl;
             }
@@ -1415,7 +1405,7 @@ int main()
         High high;
         high.callHigh();
         cin >> rare_type;
-        
+
         if (rare_type == 'Z')  // Yellow
         {
             Yellow yellow;
@@ -1426,55 +1416,55 @@ int main()
             cout << "Неверный ввод! Попробуйте снова." << endl;
             continue;
         }
-            
+
             switch(sword_choice) {
-                case 1: { 
-                    ChristmasTreeSword c; 
+                case 1: {
+                    ChristmasTreeSword c;
                     global_sharpness = c.sharpness;
                     global_level = c.lvl;
                     global_sword_name = "Christmas tree sword";
-                    break; 
+                    break;
                 }
-                case 2: { 
-                    TrueExcalibur t; 
+                case 2: {
+                    TrueExcalibur t;
                     global_sharpness = t.sharpness;
                     global_level = t.lvl;
                     global_sword_name = "True Excalibur";
-                    break; 
+                    break;
                 }
-                case 3: { 
-                    HorsemansBlade h; 
+                case 3: {
+                    HorsemansBlade h;
                     global_sharpness = h.sharpness;
                     global_level = h.lvl;
                     global_sword_name = "Horseman's blade";
-                    break; 
+                    break;
                 }
-                case 4: { 
-                    KeySword k; 
+                case 4: {
+                    KeySword k;
                     global_sharpness = k.sharpness;
                     global_level = k.lvl;
                     global_sword_name = "Key-sword";
-                    break; 
+                    break;
                 }
-                case 5: { 
-                    ManiacsKnife m; 
+                case 5: {
+                    ManiacsKnife m;
                     global_sharpness = m.sharpness;
                     global_level = m.lvl;
                     global_sword_name = "Maniac's knife";
-                    break; 
+                    break;
                 }
-                case 6: { 
-                    SoaringDragon s; 
+                case 6: {
+                    SoaringDragon s;
                     global_sharpness = s.sharpness;
                     global_level = s.lvl;
                     global_sword_name = "Soaring dragon";
-                    break; 
+                    break;
                 }
                 default: cout << "Invalid choice!" << endl;
             }
         }
     }
-    
+
     // Вывод информации о выбранном мече
     if (global_sharpness > 0) {
         cout << "\n=== ВЫБРАН МЕЧ ===" << endl;
@@ -1483,7 +1473,7 @@ int main()
         cout << "Уровень: " << global_level << endl;
         cout << "==================\n" << endl;
     }
-    
+
     cout<<"Пора сразиться с боссом, выбери своего противника!"<<endl;
     cout<<"Holin - A, Hitkliff -B, Lepus - C"<<endl;
 
