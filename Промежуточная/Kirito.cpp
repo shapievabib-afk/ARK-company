@@ -3,7 +3,9 @@ class medium : public Swords
     public:
     medium()
     {
-        this->rare = "medium";
+        this->rare = "medium";}
+        void M()
+        {
         cout << "Medium? It's somewhere in the middle..."<< endl;
         cout << "                            "<<endl;
         cout << "----------------------------"<< endl;
@@ -12,8 +14,10 @@ class medium : public Swords
         cout << "Light red rare - Z"<<endl;
         cout << "pink rare - X"<<endl;
         cout << "light purple rare - C"<<endl;
-        cout << "lime rare - V"<<endl;
-    }
+        cout << "lime rare - V"<<endl;  }
+
+
+
 
 };
 class Light_red : public medium
@@ -22,6 +26,11 @@ class Light_red : public medium
     Light_red()
     {
         this->rare = "Light_red";
+
+
+    }
+    void M1
+    {
         cout << "Light red. It's almost red, but a little lighter"<< endl;
         cout << "                            "<<endl;
         cout << "----------------------------"<< endl;
@@ -42,6 +51,11 @@ class pink : public medium
     pink()
     {
         this->rare = "pink";
+
+
+    }
+    void M2
+    {
         cout << "Pink is a very cute color"<< endl;
         cout << "                            "<<endl;
         cout << "----------------------------"<< endl;
@@ -53,7 +67,6 @@ class pink : public medium
         cout << "Excalibur - 4"<<endl;
         cout << "sharp-tongued sword - 5"<<endl;
         cout << "The Sower - 6"<<endl;
-
     }
 };
 class light_purple : public medium
@@ -62,7 +75,11 @@ class light_purple : public medium
     light_purple()
     {
         this->rare = "light_purple";
-        cout << "My favorite jacket was light purple. Oh, how nostalgic"<< endl;
+
+    }
+    void M3
+    {
+         cout << "My favorite jacket was light purple. Oh, how nostalgic"<< endl;
         cout << "                            "<<endl;
         cout << "----------------------------"<< endl;
         cout << "                            "<<endl;
@@ -71,10 +88,17 @@ class light_purple : public medium
         cout << "The thing - 2"<<endl;
     }
 };
+
+
 class lime_rare : public medium
 {
     public:
     lime_rare()
+    {
+        this->rare = "lime rare";
+
+    }
+    void M4
     {
         this->rare = "lime rare";
         cout << "I don't like citrus fruits, ugh"<< endl;
@@ -94,7 +118,11 @@ class red : public medium
     red()
     {
         this->rare = "red";
-        cout << "red. Not read. Red. Blood. Rage......"<< endl;
+
+    }
+    void
+    {
+       cout << "red. Not read. Red. Blood. Rage......"<< endl;
         cout << "                            "<<endl;
         cout << "----------------------------"<< endl;
         cout << "                            "<<endl;
@@ -337,3 +365,48 @@ public:
 
 
 
+class boss
+{
+    public:
+    boss()
+    {
+        HP = 0;
+        lvl = 0;
+
+    }
+    protected:
+ int HP;
+ int lvl;
+
+};
+
+class Holin : public boss
+{
+    Holin()
+    {
+        HP=10;
+        lvl =1;
+        cout<<"What is temperature?"<endl;
+        cout<<"This is a very difficult question."<endl;
+        cout<<"I will not answer it."<endl;
+        cout<<"---------------------"<endl;
+    }
+};
+
+class Hitcliff : public boss
+{
+    Hitcliff()
+    {
+        HP=300;
+        lvl =96;
+        cout<<"Let's solve everything with a duel!"<endl;
+        cout<<"If you win, the game will end."<endl;
+
+        cout<<"---------------------"<endl;
+    }
+    void win
+    {
+        cout << ""<<endl;
+    }
+
+};
