@@ -386,11 +386,22 @@ class Holin : public boss
     {
         HP=10;
         lvl =1;
-        cout<<"What is temperature?"<endl;
-        cout<<"This is a very difficult question."<endl;
-        cout<<"I will not answer it."<endl;
-        cout<<"---------------------"<endl;
+        cout<<"What is temperature?"<<endl;
+        cout<<"This is a very difficult question."<<endl;
+        cout<<"I will not answer it."<<endl;
+        cout<<"---------------------"<<endl;
     }
+    void win()
+    {
+        cout << "– Oh, I forgot to mention. Kirito-kun, Asuna-kun... congratulations on completing the game."<<endl;
+
+    }
+    void lose()
+    {
+        cout<< "Hitcliff watched my movement with pity,"  <<endl;
+
+    }
+
 };
 
 class Hitcliff : public boss
@@ -399,14 +410,26 @@ class Hitcliff : public boss
     {
         HP=300;
         lvl =96;
-        cout<<"Let's solve everything with a duel!"<endl;
-        cout<<"If you win, the game will end."<endl;
+        cout<<"Let's solve everything with a duel!"<<endl;
+        cout<<"If you win, the game will end."<<endl;
 
-        cout<<"---------------------"<endl;
+        cout<<"---------------------"<<endl;
     }
-    void win
+    void win()
     {
-        cout << ""<<endl;
+        cout << "– Oh, I forgot to mention. Kirito-kun, Asuna-kun... congratulations on completing the game."<<endl;
+        cout <<"We looked up at Hitcliff. He looked down at us with a calm face"<<endl;
+        cout <<"------------------------------------"<<endl;
+        cout <<"Well, I have to go."<<endl;
+    }
+    void lose()
+    {
+        cout<< "Hitcliff watched my movement with pity,"  <<endl;
+        cout<< "which was neither a technique nor even an attack."  <<endl;
+        cout<< "He easily deflected and knocked my sword away with his shield,"  <<endl;
+        cout<< "and the blade in his right hand pierced my chest."  <<endl;
+        cout<< "--------------------------------"  <<endl;
+        cout<< "System message: You're dead"  <<endl;
     }
 
 };
