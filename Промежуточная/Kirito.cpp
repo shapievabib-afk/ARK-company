@@ -393,12 +393,12 @@ class Holin : public boss
     }
     void win()
     {
-        cout << "– Oh, I forgot to mention. Kirito-kun, Asuna-kun... congratulations on completing the game."<<endl;
+        cout << "-Yes, I lost. But you'll lose in the session!"<<endl;
 
     }
     void lose()
     {
-        cout<< "Hitcliff watched my movement with pity,"  <<endl;
+        cout<< "-Mde, you still have a lot to learn."  <<endl;
 
     }
 
@@ -410,7 +410,7 @@ class Hitcliff : public boss
     {
         HP=300;
         lvl =96;
-        cout<<"Let's solve everything with a duel!"<<endl;
+        cout<<"- Let's solve everything with a duel!"<<endl;
         cout<<"If you win, the game will end."<<endl;
 
         cout<<"---------------------"<<endl;
@@ -418,9 +418,11 @@ class Hitcliff : public boss
     void win()
     {
         cout << "– Oh, I forgot to mention. Kirito-kun, Asuna-kun... congratulations on completing the game."<<endl;
+        cout << " "<<endl;
         cout <<"We looked up at Hitcliff. He looked down at us with a calm face"<<endl;
         cout <<"------------------------------------"<<endl;
-        cout <<"Well, I have to go."<<endl;
+        cout << " "<<endl;
+        cout <<"-Well, I have to go."<<endl;
     }
     void lose()
     {
@@ -429,7 +431,32 @@ class Hitcliff : public boss
         cout<< "He easily deflected and knocked my sword away with his shield,"  <<endl;
         cout<< "and the blade in his right hand pierced my chest."  <<endl;
         cout<< "--------------------------------"  <<endl;
+        cout << " "<<endl;
         cout<< "System message: You're dead"  <<endl;
+    }
+
+};
+
+
+
+class Lepus : public boss
+{
+    Lepus()
+    {
+        HP=80;
+        lvl =30;
+        cout<<"Aggressive animal sounds!"<<endl;
+
+    }
+    void win()
+    {
+        cout << "Sounds of sadness"<<endl;
+
+    }
+    void lose()
+    {
+        cout<< "Sounds of joy"  <<endl;
+
     }
 
 };
