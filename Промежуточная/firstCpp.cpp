@@ -12,9 +12,10 @@ public:
 
 private:
     int age;
-}
+};
 
 int main()
 {
     cout<<"Khalid age is"<<Khalid.age<<endl;
+    cout<<"privet";
 }
