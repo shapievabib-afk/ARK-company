@@ -2,7 +2,6 @@
 #include <string>
 #include <SFML/Audio.hpp>
 #include <filesystem>
-#include <filesystem>
 #ifdef _WIN32
 #include <windows.h>
 #elif defined(__linux__)
