@@ -841,7 +841,7 @@ public:
     Star_fall()
     {
         sharpness = 69;
-        lvl = 70;
+        lvl = 100;
     }
 
 };
@@ -867,6 +867,8 @@ public:
     {
         HP=10;
         lvl =1;
+
+        cout<<" "<<endl;
         cout<<"What is temperature?"<<endl;
         cout<<"This is a very difficult question."<<endl;
         cout<<"I will not answer it."<<endl;
@@ -875,11 +877,15 @@ public:
     void win()
     {
         cout << "-Yes, I lost. But you'll lose in the session!"<<endl;
+        cout<<" "<<endl;
+        cout<<" "<<endl;
 
     }
     void lose()
     {
         cout<< "-Mde, you still have a lot to learn."  <<endl;
+        cout<<" "<<endl;
+        cout<<" "<<endl;
 
     }
 
@@ -905,9 +911,11 @@ public:
         cout <<"------------------------------------"<<endl;
         cout << " "<<endl;
         cout <<"-Well, I have to go."<<endl;
+        cout<<" "<<endl;
     }
     void lose()
     {
+        cout<<" "<<endl;
         cout<< "Hitcliff watched my movement with pity,"  <<endl;
         cout<< "which was neither a technique nor even an attack."  <<endl;
         cout<< "He easily deflected and knocked my sword away with his shield,"  <<endl;
@@ -915,6 +923,7 @@ public:
         cout<< "--------------------------------"  <<endl;
         cout << " "<<endl;
         cout<< "System message: You're dead"  <<endl;
+        cout<<" "<<endl;
     }
 
 };
@@ -1559,18 +1568,25 @@ int main()
         Lepus L;
         if (L.lvl < global_level)
         {
+            cout<<" "<<endl;
+            cout<<"--------------------"<<endl;
         cout<<"The fight begins now!"<<endl;
         cout<<"Beat him with three shots"<<endl;
+        cout<<" "<<endl;
         cout<<"Your Summary damage is "<<3 * global_sharpness<<endl;
         cout<<"Boss HP:"<<L.HP<<endl;
 
         if (L.HP <= 3 * global_sharpness)
         {
+            cout<<" "<<endl;
             cout<<"You win!"<<endl;
-            cout<<"Boss:"<<endl;
+            cout<<" "<<endl;
+            cout<<" "<<endl;
+            cout<<"Boss:   "<<endl;
             L.win();
-
+            cout<<" "<<endl;
             cout<<"Thanks for playing!"<<endl;
+            cout<<" "<<endl;
 
             return 0;
         }
@@ -1579,8 +1595,10 @@ int main()
             cout<<"You lost!"<<endl;
             cout<<"Boss:"<<endl;
             L.lose();
+            cout<<" "<<endl;
 
             cout<<"Thanks for playing!"<<endl;
+            cout<<" "<<endl;
 
             return 0;
         }
