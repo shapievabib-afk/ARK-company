@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stdio.h>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ string rare;
         rare = "none";
     }
         void callSword() {
-            cout << "Lets pick a sword" << endl;
+            cout << "\033[1;33mLets pick a sword" << endl;
             cout << "At first, choose a rare class:" << endl;
             cout << "Low - Z" << endl;
             cout << "Medium - X" << endl;
@@ -943,12 +944,8 @@ public:
 
 };
 
-
-
-
 int main()
 {
-
     bool playAgain = true;
 
     while(playAgain){
@@ -956,14 +953,14 @@ int main()
     char rare_type = 'q';
     int sword_choice;
 
-    cout << "Welcome to Terraria Boss fighting, at first you need a weapon." << endl;
+    cout << "\033[1;35mWelcome to Terraria Boss fighting, at first you need a weapon." << endl;
     Swords sword;
     sword.callSword();
 
     cin >> type;
 
     if (type != 'Z' && type != 'X' && type != 'C') {
-            cout << "Wrong, try again." << endl;
+            cout << "\033[1;33mWrong, try again." << endl;
             continue;
         }
 
@@ -974,7 +971,7 @@ int main()
         cin >> rare_type;
 
         if (rare_type != 'Z' && rare_type != 'X' && rare_type != 'C' && rare_type != 'V') {
-            cout << "Wrong, try again." << endl;
+            cout << "\033[1;33mWrong, try again." << endl;
             continue;
         }
 

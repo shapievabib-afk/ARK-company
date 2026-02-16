@@ -60,7 +60,7 @@ string rare;
         rare = "none";
     }
         void callSword() {
-            cout << "Lets pick a sword" << endl;
+            cout << "\033[1;33mLets pick a sword" << endl;
             cout << "At first, choose a rare class:" << endl;
             cout << "Low - Z" << endl;
             cout << "Medium - X" << endl;
@@ -1016,7 +1016,7 @@ if (!music.openFromFile(musicPath.string())) {
     char rare_type = 'q';
     int sword_choice;
     
-    cout << "Welcome to Terraria Boss fighting, at first you need a weapon." << endl;
+    cout << "\033[1;35mWelcome to Terraria Boss fighting, at first you need a weapon." << endl;
     Swords sword;
     sword.callSword();
     
