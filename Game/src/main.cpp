@@ -995,7 +995,6 @@ std::string exeDir = getExecutableDir();
 std::filesystem::path musicPath = std::filesystem::path(exeDir) / "resources" / "Jacal.ogg";
 
 if (!music.openFromFile(musicPath.string())) {
-    // Если не нашли в resources/, пробуем просто имя файла (на случай, если кто-то положил ogg рядом с exe)
     if (!music.openFromFile("Jacal.ogg")) {
         std::cout << "Can't find music!" << std::endl;
     } else {
@@ -1027,7 +1026,7 @@ if (!music.openFromFile(musicPath.string())) {
             continue;
         }
     
-    if (type == 'Z')  // Low
+    if (type == 'Z') 
     {
         Low low;
         low.lowcall();
@@ -1038,7 +1037,7 @@ if (!music.openFromFile(musicPath.string())) {
             continue;
         }
         
-        if (rare_type == 'Z')  // White
+        if (rare_type == 'Z') 
         {
             White white;
             white.callWhite();
@@ -1052,7 +1051,7 @@ if (!music.openFromFile(musicPath.string())) {
             switch(sword_choice) {
                 case 1: { 
                     Ebony e; 
-                    global_sharpness = e.sharpness;  // Обратите внимание: sharpness protected?
+                    global_sharpness = e.sharpness;
                     global_level = e.lvl;
                     global_sword_name = "Ebony sword";
                     break; 
@@ -1274,7 +1273,7 @@ if (!music.openFromFile(musicPath.string())) {
             }
         }
     }
-    else if (type == 'X')  // Medium
+    else if (type == 'X')  
     {
         medium mid;
         mid.M();
@@ -1282,7 +1281,7 @@ if (!music.openFromFile(musicPath.string())) {
 
         
         
-        if (rare_type == 'Z')  // Light red
+        if (rare_type == 'Z')  
         {
             Light_red lr;
             lr.M1();
@@ -1339,7 +1338,7 @@ if (!music.openFromFile(musicPath.string())) {
                 default: cout << "Invalid choice!" << endl;
             }
         }
-        else if (rare_type == 'X')  // Pink
+        else if (rare_type == 'X')  
         {
             pink p;
             p.M2();
@@ -1396,7 +1395,7 @@ if (!music.openFromFile(musicPath.string())) {
                 default: cout << "Invalid choice!" << endl;
             }
         }
-        else if (rare_type == 'C')  // Light purple
+        else if (rare_type == 'C')  
         {
             light_purple lp;
             lp.M3();
@@ -1425,7 +1424,7 @@ if (!music.openFromFile(musicPath.string())) {
                 default: cout << "Invalid choice!" << endl;
             }
         }
-        else if (rare_type == 'V')  // Lime
+        else if (rare_type == 'V')  
         {
             lime_rare lime;
             lime.M4();
@@ -1462,13 +1461,13 @@ if (!music.openFromFile(musicPath.string())) {
             }
         }
     }
-    else if (type == 'C')  // High
+    else if (type == 'C')  
     {
         High high;
         high.callHigh();
         cin >> rare_type;
         
-        if (rare_type == 'Z')  // Yellow
+        if (rare_type == 'Z')  
         {
             Yellow yellow;
             yellow.callYellow();
@@ -1527,7 +1526,6 @@ if (!music.openFromFile(musicPath.string())) {
         }
     }
     
-    // Вывод информации о выбранном мече
     if (global_sharpness > 0) {
         cout << "\n=== SWORD SELECTED ===" << endl;
         cout << "Name: " << global_sword_name << endl;
@@ -1543,6 +1541,9 @@ if (!music.openFromFile(musicPath.string())) {
 
     cin>>boss_type;
 
+    cout << "\n=== BOSS SELECTED ===" << endl;
+    cout << "\n================================" << endl;
+
     if (boss_type == 'A')
     {
         Holin h;
@@ -1556,8 +1557,10 @@ if (!music.openFromFile(musicPath.string())) {
         if (h.HP <= 3 * global_sharpness)
         {
             cout<<"You win!"<<endl;
+            cout << "\n================================" << endl;
             cout<<"Boss:"<<endl;
             h.win();
+            cout << "\n================================" << endl;
 
             cout<<"Thanks for playing!"<<endl;
 
@@ -1566,8 +1569,10 @@ if (!music.openFromFile(musicPath.string())) {
         else
         {
             cout<<"You lost!"<<endl;
+            cout << "\n================================" << endl;
             cout<<"Boss:"<<endl;
             h.lose();
+            cout << "\n================================" << endl;
 
             cout<<"Thanks for playing!"<<endl;
 
@@ -1576,6 +1581,7 @@ if (!music.openFromFile(musicPath.string())) {
         }
         else{
         cout<<"Sorry, your level is"<<global_level<<", it`s less than boss level"<<h.lvl<<". Try fight him next time"<<endl;
+        cout << "\n================================" << endl;
         continue;
         }
     }
@@ -1593,8 +1599,10 @@ if (!music.openFromFile(musicPath.string())) {
         if (s.HP <= 3 * global_sharpness)
         {
             cout<<"You win!"<<endl;
+            cout << "\n================================" << endl;
             cout<<"Boss:"<<endl;
             s.win();
+            cout << "\n================================" << endl;
 
             cout<<"Thanks for playing!"<<endl;
 
@@ -1603,8 +1611,10 @@ if (!music.openFromFile(musicPath.string())) {
         else
         {
             cout<<"You lost!"<<endl;
+            cout << "\n================================" << endl;
             cout<<"Boss:"<<endl;
             s.lose();
+            cout << "\n================================" << endl;
 
             cout<<"Thanks for playing!"<<endl;
 
@@ -1613,6 +1623,7 @@ if (!music.openFromFile(musicPath.string())) {
         }
         else{
         cout<<"Sorry, your level is"<<global_level<<", it`s less than boss level"<<s.lvl<<". Try fight him next time"<<endl;
+        cout << "\n================================" << endl;
         continue;
         }
     }
@@ -1630,8 +1641,10 @@ if (!music.openFromFile(musicPath.string())) {
         if (L.HP <= 3 * global_sharpness)
         {
             cout<<"You win!"<<endl;
+            cout << "\n================================" << endl;
             cout<<"Boss:"<<endl;
             L.win();
+            cout << "\n================================" << endl;
 
             cout<<"Thanks for playing!"<<endl;
 
@@ -1639,9 +1652,12 @@ if (!music.openFromFile(musicPath.string())) {
         }
         else
         {
+
             cout<<"You lost!"<<endl;
+            cout << "\n================================" << endl;
             cout<<"Boss:"<<endl;
             L.lose();
+            cout << "\n================================" << endl;
 
             cout<<"Thanks for playing!"<<endl;
 
@@ -1650,6 +1666,7 @@ if (!music.openFromFile(musicPath.string())) {
         }
         else{
         cout<<"Sorry, your level is"<<global_level<<", it`s less than boss level"<<L.lvl<<". Try fight him next time"<<endl;
+        cout << "\n================================" << endl;
         continue;
         }
     }
