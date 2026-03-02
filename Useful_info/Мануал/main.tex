@@ -1,0 +1,465 @@
+\documentclass[12pt,a4paper]{article}
+
+% ------------------- Пакеты -------------------
+\usepackage[utf8]{inputenc}    % Кодировка
+\usepackage[russian]{babel}    % Русский язык
+\usepackage{graphicx}           % Для вставки картинок
+\usepackage{hyperref}           % Гиперссылки
+\usepackage{geometry}           % Настройка полей
+\geometry{top=2cm, bottom=2cm, left=2.5cm, right=1.5cm}
+\usepackage{titlesec}           % Настройка заголовков
+\usepackage{listings}           % Оформление листингов кода
+\usepackage{xcolor}              % Цвета для кода
+\usepackage{enumitem}           % Улучшенные списки
+\usepackage{fancyhdr}           % Колонтитулы
+\usepackage{lastpage}           % Номер последней страницы
+\usepackage{tcolorbox}           % Цветные блоки (для предупреждений)
+
+% ------------------- Настройка кода -------------------
+\lstdefinestyle{codestyle}{
+    backgroundcolor=\color{lightgray!10},
+    commentstyle=\color{green!60!black},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{orange},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=Python,  % Можно заменить на C++, Bash и т.д.
+    frame=single
+}
+\lstset{style=codestyle}
+
+% ------------------- Настройка заголовков -------------------
+\titleformat{\section}{\large\bfseries}{Пункт \thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% ------------------- Настройка колонтитулов -------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ------------------- Титульная информация -------------------
+\title{\textbf{Технический мануал: \\ Работа с TOF-сенсором и UART}}
+\author{Иван Иванов \\ ООО "ТехноПроект"}
+\date{\today}
+
+\begin{document}
+
+% ------------------- Титульный лист -------------------
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+        \Huge
+        \textbf{Информационное пособие к проекту по информатике}
+        
+        \vspace{0.5cm}
+        \LARGE
+        Московский физико-технический институт.\\
+        Ребенков Андрей, Троянова Милана, Шапиев Халид.\\
+        Группа Б03-502
+        
+        \vspace{1.5cm}
+        \textbf{TOF-сенсор, UART интерфейс, COM-порты, обработка данных,
+        GUI}
+        
+        \vfill
+        \includegraphics[width=0.4\textwidth]{example-image} % Замените на логотип
+        
+        \vspace{0.8cm}
+        \Large
+        Долгопрудный, 2026
+    \end{center}
+\end{titlepage}
+
+% ------------------- Оглавление -------------------
+\tableofcontents
+\newpage
+
+% ------------------- Введение -------------------
+\section{TOF-сенсор, кто это?}
+Time-of-flight-камера (англ. Time-of-flight camera (ToF camera)) — видеокамера, формирующая так называемое дальностное изображение (дальностный портрет). Используется для создания изображений, которые в качестве пикселей содержат оценки расстояний от экрана до конкретных точек наблюдения.\\
+
+\subsection{Задачи по сенсору}
+\begin{itemize}
+    \item создание обработчика данных(см. далее)
+    \item Настройка UART-соединения.
+    \item Разработка практичного и отвечающего требованиям приложения с GUI для работы с сенсором.
+    \item Создание ПО для соединения сенсора и приложения.
+    \item Возможны дополнения\\
+
+    *обрабочик необходим для превращения сырых данных сенсора в шестнадцатиричной системе в что-то по типу: карты глубины, координатного файла с отметкой глубины, 3д модели глубины 2д изображения.
+\end{itemize}
+
+\subsection{Команда проекта}
+\begin{description}[style=nextline]
+    \item[Андрей] Специалист в создании красивых и функциональных оболочек для ПО. Фанат вархаммера.
+    \item[Милана] Активный деятель команды, я хз что написать.
+    \item[Халид] Лысый прогер, using namespace std не про него.
+\end{description}
+
+\newpage
+
+% ------------------- Основная часть -------------------
+\section{UART-интерфейс. Важные моменты.}
+
+UART (Universal Asynchronous Receiver-Transmitter) - интерфейс связи между цифровыми устройствами, по нему МК может общаться с другими микросхемами и МК. В нашей работе это главное, для коннекта между сенсором и ПО.\\
+UART не является шиной (но может использоваться как шина, топология выстраивается программистом) - он предназначен для передачи данных между двумя устройствами, причём оба этих устройства могут передавать данные по своему усмотрению, в том числе одновременно. Таким образом, UART - это просто передатчик между равнозначными "устройством 1" и "устройством 2".\\
+*Шина (Bus) — это общий физический канал (набор проводников), который объединяет несколько устройств для передачи данных.\\
+\subsection{Схема соединений}
+\begin{itemize}
+    \item \textbf{Сенсор (TX)} $\rightarrow$ \textbf{Переходник (RX)}
+    \item \textbf{Сенсор (RX)} $\rightarrow$ \textbf{Переходник (TX)}
+    \item \textbf{Сенсор (GND)} $\rightarrow$ \textbf{Переходник (GND)}
+    \item \textbf{Сенсор (VCC)} $\rightarrow$ \textbf{3.3V / 5V (в зависимости от модели)}
+\end{itemize}
+
+TX - (transmit) пин для отправки данных, а RX - (receiver) получает их. То, как у нас будут соединен интерфейс с сенсором видно выше.
+
+\begin{center}
+    \fbox{Схема подключения (вставьте изображение здесь)}
+\end{center}
+
+\begin{tcolorbox}[colback=red!5!white, colframe=red!75!black, title=Важно!]
+Перед подключением убедитесь, что уровни напряжений сенсора и переходника совпадают. Использование 5V логики для 3.3V сенсора может вывести его из строя.
+\end{tcolorbox}
+
+\subsection{Источники для ознакомления с UART}
+\begin{itemize}
+    \item \href{https://components.espressif.com/components/plasmapper/pl_uart/versions/1.1.0/examples?language=en}{интересная C++ обвязка для UART от пользователя plasmapper. Примеры демонстрируют инициализацию и даже создание эхо-сервера с использованием классов — то, что нужно для объектно-ориентированного подхода на микроконтроллере.}
+    \item \href{https://doc.embedfire.com/linux/rk356x/Qt/zh/latest/lubancat_qt/senior/qt_serialport.html}{Мануал к библиотеке Qt- возможно ключевой для нашей работы с UART интерфейсом сенсора. Оригинал на китайском, но переводчик в помощь.}
+\end{itemize}
+
+\section{Настройка UART в Windows}
+
+После подключения USB-UART переходника в системе будет создан виртуальный COM-порт. В отличие от Linux, где порт выглядит как файл \texttt{/dev/ttyUSB0}, в Windows он получает имя \texttt{COM3}, \texttt{COM5} и т.д.
+
+\subsection{Проверка подключения (определение номера порта)}
+\begin{enumerate}
+    \item Откройте \textbf{Диспетчер устройств} (Device Manager). Самый быстрый способ: нажмите \texttt{Win + X} и выберите соответствующий пункт меню.
+    \item Разверните раздел \textbf{Порты (COM и LPT)}.
+    \item Найдите ваш переходник. Обычно он подписан названием чипа: \texttt{USB Serial Port (COM3)} или \texttt{CH340 (COM5)}.
+    \item Запомните номер порта (например, \texttt{COM3}). Он понадобится для подключения.
+\end{enumerate}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Примечание]
+Если переходник определился как неизвестное устройство (с желтым восклицательным знаком), необходимо установить драйвер. Для популярных чипов (CH340, CP2102, FT232) драйверы обычно скачиваются с сайта производителя или находятся автоматически через Windows Update.
+\end{tcolorbox}
+
+\subsection{Установка прав доступа}
+В Windows, в отличие от Ubuntu, нет ограничений по группам для доступа к COM-портам. Если порт отображается в Диспетчере устройств без ошибок, то любая программа от имени текущего пользователя сможет к нему подключиться.
+\begin{itemize}
+    \item Единственная проблема: порт может быть занят другой программой.
+    \item Решение: закройте все программы, которые могли открыть порт (среды разработки, предыдущие сессии терминала).
+\end{itemize}
+
+\subsection{Проверка приема данных (программа на Qt)}
+
+Вместо готовых терминалов (PuTTY, Tera Term) мы будем использовать программу, написанную на Qt с использованием модуля \texttt{QSerialPort}. Это позволит нам не только проверить работу сенсора, но и получить основу для дальнейшей разработки проекта.
+
+\subsubsection*{Создание простейшего терминала в Qt}
+
+\begin{enumerate}
+    \item \textbf{Создайте новый проект} в Qt Creator: 
+    \begin{itemize}
+        \item \texttt{File → New File or Project → Application → Qt Widgets Application}.
+        \item Назовите проект, например, \texttt{TOF\_Sensor\_Test}.
+    \end{itemize}
+    
+    \item \textbf{Добавьте модуль последовательного порта} в файл \texttt{TOF\_Sensor\_Test.pro}:
+    \begin{lstlisting}[style=myCStyle]
+QT += core gui serialport
+    \end{lstlisting}
+    
+    \item \textbf{Разработайте интерфейс} (файл \texttt{mainwindow.ui}) или создайте его программно. Минимально необходимые элементы:
+    \begin{itemize}
+        \item Выпадающий список (\texttt{QComboBox}) для выбора COM-порта.
+        \item Поле ввода (\texttt{QLineEdit}) или выпадающий список для выбора скорости (baudrate).
+        \item Кнопка (\texttt{QPushButton}) "Подключиться" / "Отключиться".
+        \item Текстовая область (\texttt{QTextEdit}) для вывода полученных данных.
+    \end{itemize}
+    
+    \item \textbf{Реализуйте логику работы} в файле \texttt{mainwindow.cpp}:
+\end{enumerate}
+
+\begin{lstlisting}[style=myCStyle, caption=Пример кода для проверки приема данных]
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QDebug>
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    
+    // Поиск доступных портов при запуске
+    foreach (const QSerialPortInfo &portInfo, QSerialPortInfo::availablePorts()) {
+        ui->comboBoxPort->addItem(portInfo.portName());
+    }
+    
+    // Настройка скоростей (baudrates)
+    ui->comboBoxBaud->addItems(QStringList() << "9600" << "19200" << "38400" 
+                                             << "57600" << "115200");
+    ui->comboBoxBaud->setCurrentText("115200"); // По умолчанию
+    
+    // Создание объекта последовательного порта
+    serial = new QSerialPort(this);
+    
+    // Связываем сигнал готовности данных с обработчиком
+    connect(serial, &QSerialPort::readyRead, this, &MainWindow::readData);
+    
+    // Кнопка подключения
+    connect(ui->pushButtonConnect, &QPushButton::clicked, this, &MainWindow::onConnectButtonClicked);
+}
+
+MainWindow::~MainWindow()
+{
+    if(serial->isOpen()) serial->close();
+    delete ui;
+}
+
+void MainWindow::onConnectButtonClicked()
+{
+    if(serial->isOpen()) {
+        // Отключаемся
+        serial->close();
+        ui->pushButtonConnect->setText("Подключиться");
+        ui->textEdit->append("Порт закрыт");
+    } else {
+        // Настраиваем и подключаемся
+        serial->setPortName(ui->comboBoxPort->currentText());
+        serial->setBaudRate(ui->comboBoxBaud->currentText().toInt());
+        serial->setDataBits(QSerialPort::Data8);
+        serial->setParity(QSerialPort::NoParity);
+        serial->setStopBits(QSerialPort::OneStop);
+        serial->setFlowControl(QSerialPort::NoFlowControl);
+        
+        if(serial->open(QIODevice::ReadWrite)) {
+            ui->pushButtonConnect->setText("Отключиться");
+            ui->textEdit->append("Подключено к " + serial->portName() + 
+                                 " со скоростью " + ui->comboBoxBaud->currentText());
+        } else {
+            ui->textEdit->append("Ошибка открытия порта: " + serial->errorString());
+        }
+    }
+}
+
+void MainWindow::readData()
+{
+    // Чтение всех доступных данных
+    QByteArray data = serial->readAll();
+    
+    // Преобразование в hex-строку (для отладки)
+    QString hexString = data.toHex(' ').toUpper();
+    
+    // Вывод в текстовое поле
+    ui->textEdit->append("Получено (" + QString::number(data.size()) + " байт): " + hexString);
+    
+    // Дополнительно: попытка интерпретировать как ASCII, если это текст
+    QString asciiString = QString::fromUtf8(data);
+    if(!asciiString.isEmpty() && asciiString.isPrint()) {
+        ui->textEdit->append("Как текст: " + asciiString);
+    }
+}
+\end{lstlisting}
+
+\begin{center}
+    \fbox{Скриншот окна программы на Qt (вставьте изображение)}
+\end{center}
+
+\subsubsection*{Запуск и проверка}
+
+\begin{enumerate}
+    \item Подключите ваш TOF-сенсор к компьютеру через USB-UART переходник.
+    \item Запустите программу (зеленая кнопка \textbf{Run} в Qt Creator или собранный \texttt{.exe} файл).
+    \item Выберите нужный порт (например, \texttt{COM3}) в выпадающем списке.
+    \item Установите скорость, соответствующую даташиту вашего сенсора (обычно 115200).
+    \item Нажмите кнопку \textbf{Подключиться}.
+    \item Если сенсор отправляет данные, они начнут появляться в текстовой области в 16-ричном виде.
+\end{enumerate}
+
+\begin{tcolorbox}[colback=green!5!white, colframe=green!75!black, title=Преимущества подхода на Qt]
+\begin{itemize}
+    \item \textbf{Полный контроль:} Вы сами решаете, как отображать и обрабатывать данные.
+    \item \textbf{Обработка hex:} Функция \texttt{data.toHex()} делает именно то, что нужно для вашего сенсора.
+    \item \textbf{Отладка:} Код можно легко дополнить логированием в файл, построением графиков и т.д.
+    \item \textbf{Кроссплатформенность:} Этот же код будет работать на Linux и macOS без изменений.
+    \item \textbf{Нет проблем с "зависшими" портами:} Приложение само корректно закрывает порт при выходе.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=red!5!white, colframe=red!75!black, title=Важно!]
+\begin{itemize}
+    \item Убедитесь, что в \texttt{.pro} файле проекта добавлена строка \texttt{QT += serialport}.
+    \item Если данные не отображаются, проверьте:
+    \begin{itemize}
+        \item Правильность выбранного COM-порта (в Диспетчере устройств Windows).
+        \item Соответствие скорости (baudrate) даташиту сенсора.
+        \item Не запущена ли другая программа (Arduino IDE, монитор порта), которая могла захватить порт.
+    \end{itemize}
+    \item При закрытии программы порт освобождается автоматически.
+\end{itemize}
+\end{tcolorbox}
+
+\section{Программная обработка данных}
+
+Данные от TOF-сенсора обычно приходят в бинарном виде. Разберем пример на Python с использованием библиотеки \texttt{pyserial}.
+
+\subsection{Установка библиотеки}
+\begin{lstlisting}[language=bash]
+pip install pyserial
+\end{lstlisting}
+
+\subsection{Пример чтения сырых данных}
+\begin{lstlisting}[language=Python]
+import serial
+
+# Открытие порта
+ser = serial.Serial(
+    port='/dev/ttyUSB0',
+    baudrate=115200,
+    timeout=1,
+    bytesize=8,
+    parity='N',
+    stopbits=1
+)
+
+while True:
+    # Чтение 9 байт (для сенсоров типа TF-Luna)
+    data = ser.read(9)
+    if data and len(data) == 9:
+        print(f"Получено байт: {data.hex()}")
+\end{lstlisting}
+
+\subsection{Парсинг пакета}
+Предположим, что сенсор отправляет пакеты формата:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+0x59 & 0x59 & DIST\_L & DIST\_H & STR\_L & STR\_H & TEMP\_L & TEMP\_H & SUM \\
+\hline
+\end{tabular}
+\end{center}
+
+Где:
+\begin{itemize}
+    \item \texttt{DIST\_L} и \texttt{DIST\_H} — младший и старший байты дистанции.
+    \item \texttt{SUM} — контрольная сумма (сумма первых 8 байт \& 0xFF).
+\end{itemize}
+
+Функция парсинга:
+\begin{lstlisting}[language=Python]
+def parse_tf_packet(packet):
+    # Проверка заголовка
+    if packet[0] != 0x59 or packet[1] != 0x59:
+        return None
+    
+    # Контрольная сумма
+    checksum = sum(packet[:8]) & 0xFF
+    if checksum != packet[8]:
+        return None
+    
+    # Дистанция (мм)
+    distance = packet[2] + packet[3] * 256
+    
+    # Сила сигнала
+    strength = packet[4] + packet[5] * 256
+    
+    # Температура (специфично для TF-Luna)
+    temp = packet[6] + packet[7] * 256
+    temp_c = temp / 8.0 - 256
+    
+    return distance, strength, temp_c
+\end{lstlisting}
+
+\subsection{Цикл чтения с буферизацией}
+Чтобы не потерять данные при обрыве пакета, используем буфер:
+\begin{lstlisting}[language=Python]
+buffer = bytearray()
+
+while True:
+    # Добавляем новые данные в буфер
+    buffer += ser.read(ser.in_waiting)
+    
+    # Ищем заголовок
+    while len(buffer) >= 9:
+        if buffer[0] == 0x59 and buffer[1] == 0x59:
+            packet = buffer[:9]
+            result = parse_tf_packet(packet)
+            if result:
+                dist, strength, temp = result
+                print(f"Дистанция: {dist} мм, Сила: {strength}, Темп: {temp:.1f}C")
+                buffer = buffer[9:]  # Удаляем обработанное
+            else:
+                buffer.pop(0)  # Сдвиг на байт
+        else:
+            buffer.pop(0)
+\end{lstlisting}
+
+\newpage
+\section{Возможные проблемы и их решение}
+
+\begin{enumerate}
+    \item \textbf{Порт не открывается: Permission denied.}
+        \begin{quote}
+            Решение: Добавьте пользователя в группу dialout.
+        \end{quote}
+    
+    \item \textbf{Вижу мусор или данные не приходят.}
+        \begin{quote}
+            Проверьте скорость (baudrate) в коде и даташите. Для TF-Luna часто используется 115200, но может быть и 9600.
+        \end{quote}
+    
+    \item \textbf{Пакеты "рвутся", расстояние скачет.}
+        \begin{quote}
+            Используйте буферизацию и проверку контрольной суммы (как в примере выше).
+        \end{quote}
+\end{enumerate}
+
+\begin{tcolorbox}[colback=yellow!5!white, colframe=yellow!75!black, title=Рекомендация]
+При работе с UART всегда добавляйте таймаут (timeout) при открытии порта, чтобы программа не зависала, если сенсор отключится.
+\end{tcolorbox}
+
+\section{Приложение А. Справочная информация}
+
+\subsection{Часто используемые скорости UART}
+\begin{itemize}
+    \item 9600 бод
+    \item 19200 бод
+    \item 38400 бод
+    \item 57600 бод
+    \item 115200 бод (наиболее распространенная для TOF)
+\end{itemize}
+
+\section{GUI/Интерфейс приложения}
+
+\hyperlink{https://doc.qt.io/}{Возможно}, только это и нужно.
+
+Qt должен отвечать всем нашим требованиям в разработке приложения. Вот примеры программ, которые были сделаны через него:
+
+\begin{itemize}
+    \item KDE Plasma
+    \item Telegram desktop
+    \item Virtualbox
+\end{itemize}
+
+Так что наверное в нем и будем работать.
+% ------------------- Заключение -------------------
+\section{Заключение}
+В данном мануале рассмотрены основные этапы подключения TOF-сенсора к ПК и обработки данных. Предложенные примеры кода могут быть адаптированы под конкретную модель сенсора.
+
+\end{document}
