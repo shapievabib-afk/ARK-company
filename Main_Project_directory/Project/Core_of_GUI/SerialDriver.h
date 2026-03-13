@@ -11,7 +11,6 @@ public:
     explicit SerialDevice(QObject *parent = nullptr) 
         : QObject(parent), port(new QSerialPort(this)) {
         
-        // Подключаем сигналы готовности данных
         connect(port, &QSerialPort::readyRead, this, &SerialDevice::onDataReceived);
     }
 
